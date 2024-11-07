@@ -7,12 +7,13 @@ import jakarta.persistence.*;
 public class Pregunta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PREGUNTA_ID")
     private int id;
-    @Column
+    @Column (name = "PREGUNTA")
     private String pregunta;
-    @Column
+    @Column (name = "DIFICULTAD")
     private String dificultad;
-    @Column
+    @Column (name = "CATEGORIA")
     private String categoria;
 
     public int getId() {

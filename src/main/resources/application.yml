@@ -1,3 +1,5 @@
+server:
+  port: 30031
 spring:
   datasource:
     driver-class-name: org.hsqldb.jdbcDriver
