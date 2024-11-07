@@ -11,7 +11,7 @@ public interface PreguntaMapper {
     PreguntaMapper INSTANCE = Mappers.getMapper(PreguntaMapper.class);
     PreguntaDTO toDTO(Pregunta pregunta);
 
-    List<PreguntaDTO> toDTOList(List<Pregunta> productList);
+    List<PreguntaDTO> toDTOList(List<Pregunta> preguntaList);
 
-    Pregunta toEntity(PreguntaDTO productDTO);
+    Pregunta toEntity(PreguntaDTO preguntaDTO);
 }

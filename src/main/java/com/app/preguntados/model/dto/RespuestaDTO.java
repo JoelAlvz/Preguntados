@@ -1,17 +1,11 @@
-package com.app.preguntados.model;
+package com.app.preguntados.model.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 
-@Entity
-@Table(name="RESPUESTAS")
-public class Respuesta {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "RESPUESTA_ID")
+public class RespuestaDTO {
+
     private int id;
-    @Column(name = "RESPUESTA")
     private String respuesta;
-    @Column (name = "VERDADERA")
     private Boolean verdadera;
 
     public int getId() {
