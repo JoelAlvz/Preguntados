@@ -1,6 +1,9 @@
 package com.app.preguntados.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "PREGUNTAS")
@@ -15,6 +18,9 @@ public class Pregunta {
     private String dificultad;
     @Column (name = "CATEGORIA")
     private String categoria;
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference //controla la relacion entre preguntas y respuestas para no generar bucles
+    private List<Respuesta> respuestas;
 
     public int getId() {
         return id;
@@ -40,12 +46,19 @@ public class Pregunta {
         this.dificultad = dificultad;
     }
 
-    public String getCategorias() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategorias(String categorias) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
+    }
 }

@@ -1,13 +1,16 @@
 package com.app.preguntados.model.dto;
 
+import com.app.preguntados.model.Respuesta;
 import jakarta.persistence.Column;
+
+import java.util.List;
 
 public class PreguntaDTO {
     private int id;
     private String pregunta;
     private String dificultad;
     private String categoria;
-
+    private List<Respuesta> respuestas;
     public int getId() {
         return id;
     }
@@ -38,5 +41,13 @@ public class PreguntaDTO {
 
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
+    }
+
+    public List<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
     }
 }

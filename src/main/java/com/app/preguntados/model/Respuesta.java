@@ -1,5 +1,6 @@
 package com.app.preguntados.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,10 @@ public class Respuesta {
     private String respuesta;
     @Column (name = "VERDADERA")
     private Boolean verdadera;
+    @ManyToOne
+    @JoinColumn(name = "PREGUNTA_ID", nullable = false) // "nullable = false" PREGUNTA_ID no puede ser nulo
+    @JsonBackReference //parte de la relazion que no debe ser serializada
+    private Pregunta pregunta;
 
     public int getId() {
         return id;
@@ -36,5 +41,13 @@ public class Respuesta {
 
     public void setVerdadera(Boolean verdadera) {
         this.verdadera = verdadera;
+    }
+
+    public Pregunta getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
     }
 }
