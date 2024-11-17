@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.app.preguntados.controller.front.LoginController">
+    <children>
+        <Label text="Usuario" layoutX="50" layoutY="50" />
+        <TextField fx:id="usernameField" layoutX="120" layoutY="45" />
+        <Label text="Contraseña" layoutX="50" layoutY="100" />
+        <PasswordField fx:id="passwordField" layoutX="120" layoutY="95" />
+        <Button text="Login" layoutX="120" layoutY="150" onAction="#handleLogin" />
+    </children>
+</AnchorPane>
