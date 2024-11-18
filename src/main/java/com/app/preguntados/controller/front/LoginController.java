@@ -1,32 +1,73 @@
 package com.app.preguntados.controller.front;
 
 import com.app.preguntados.PreguntadosApplication;
+import com.app.preguntados.controller.UsuarioController;
+import com.app.preguntados.model.dto.UsuarioDTO;
+import com.app.preguntados.service.UsuarioService;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public class LoginController {
-
+    @Autowired
+    private UsuarioController usuarioController;
     @FXML
     private TextField usernameField;
 
     @FXML
     private PasswordField passwordField;
 
-    @FXML
-    private void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+    public boolean validarLogin(String username, String password) {
+        // Obtenemos la lista de usuarios
+        List<UsuarioDTO> usuarios = usuarioController.queryAllUsuarios();
 
-        // Validación básica de ejemplo
-        if (username.equals("admin") && password.equals("1234")) {
+        // Recorremos la lista de usuarios y verificamos si alguno tiene el nombre y la contraseña correctos
+        for (UsuarioDTO usuario : usuarios) {
+            if (usuario.getNombre().equals(username) && usuario.getContraseña().equals(password)) {
+                return true; // Si encontramos un usuario con las credenciales correctas, retornamos true
+            }
+        }
+
+        // Si no encontramos ninguna coincidencia, retornamos false
+        return false;
+    }
+
+    @FXML
+    private void inicioLogin() {
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            System.out.println("Por favor, completa todos los campos.");
+            return;
+        }
+
+        if (validarLogin(username, password)) {
             try {
-                PreguntadosApplication.showMenuView(); // Cambiar a la vista del menú
+                System.out.println("¡Inicio de sesión exitoso!");
+                PreguntadosApplication.showMenuView();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Credenciales incorrectas");
+            System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
         }
     }
+
+    @FXML
+    private void crearCuenta(){
+        try {
+            PreguntadosApplication.showRegisterView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
+

@@ -11,6 +11,17 @@ public class UsuarioDTO {
     private String contraseña;
     private String rango;
     private List<Puntuacion> puntuaciones;
+
+    public UsuarioDTO() {
+    }
+
+    public UsuarioDTO(String nombre, String contraseña, String rango, List<Puntuacion> puntuaciones) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.rango = rango;
+        this.puntuaciones = puntuaciones;
+    }
+
     public int getId() {
         return id;
     }
@@ -49,5 +60,16 @@ public class UsuarioDTO {
 
     public void setPuntuaciones(List<Puntuacion> puntuaciones) {
         this.puntuaciones = puntuaciones;
+    }
+
+    @Override
+    public String toString() {
+        return "UsuarioDTO{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                ", rango='" + rango + '\'' +
+                ", puntuaciones=" + puntuaciones +
+                '}';
     }
 }

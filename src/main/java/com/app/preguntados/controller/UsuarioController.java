@@ -5,9 +5,7 @@ import com.app.preguntados.api.IUsuarioService;
 import com.app.preguntados.model.dto.RespuestaDTO;
 import com.app.preguntados.model.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +15,15 @@ public class UsuarioController {
     @Autowired
     IUsuarioService usuarioService;
 
-    @GetMapping(value= "/getAll")
-    public List<UsuarioDTO> queryAllUsuarios(){
+    @GetMapping(value = "/getAll")
+    public List<UsuarioDTO> queryAllUsuarios() {
         return usuarioService.queryAllUsuarios();
     }
+
+    @PostMapping(value= "/insert")
+    public int insertUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        // Llamamos al servicio para insertar el usuario y devolver su id
+        return usuarioService.insertUsuario(usuarioDTO);
+    }
+
 }

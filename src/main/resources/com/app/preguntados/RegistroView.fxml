@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="192.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.NewUserController">
+    <children>
+        <Label layoutX="17.0" layoutY="28.0" text="Nombre de usuario" />
+        <TextField fx:id="usernameField" layoutX="126.0" layoutY="24.0" />
+        <Label layoutX="17.0" layoutY="67.0" text="Contraseña" />
+        <PasswordField fx:id="passwordField" layoutX="126.0" layoutY="63.0" />
+        <Label layoutX="18.0" layoutY="104.0" text="Repetir contraseña" />
+        <PasswordField fx:id="passwordRepeatField" layoutX="126.0" layoutY="100.0" />
+        <Button layoutX="68.0" layoutY="149.0" onAction="#crearCuenta" text="Crear cuenta " />
+        <Button layoutX="175.0" layoutY="149.0" mnemonicParsing="false" onAction="#atras" text="Volver" />
+    </children>
+</AnchorPane>
