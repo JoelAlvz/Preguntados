@@ -18,7 +18,8 @@ public class LoginController {
     private UsuarioController usuarioController;
     @FXML
     private TextField usernameField;
-
+    @Autowired
+    private UsuarioActual usuarioActual;
     @FXML
     private PasswordField passwordField;
 
@@ -29,6 +30,7 @@ public class LoginController {
         // Recorremos la lista de usuarios y verificamos si alguno tiene el nombre y la contraseña correctos
         for (UsuarioDTO usuario : usuarios) {
             if (usuario.getNombre().equals(username) && usuario.getContraseña().equals(password)) {
+                usuarioActual.setUsuario(usuario); // guardamos el usuario
                 return true; // Si encontramos un usuario con las credenciales correctas, retornamos true
             }
         }
@@ -50,6 +52,7 @@ public class LoginController {
         if (validarLogin(username, password)) {
             try {
                 System.out.println("¡Inicio de sesión exitoso!");
+
                 PreguntadosApplication.showMenuView();
             } catch (Exception e) {
                 e.printStackTrace();

@@ -11,7 +11,7 @@ public class Puntuacion {
     @Column(name = "PUNTUACION_ID")
     private int id;
     @Column(name = "PUNTUACION")
-    private String puntuacion;
+    private int puntuacion;
     @ManyToOne
     @JoinColumn(name = "USUARIO_ID", nullable = false) // "nullable = false" PREGUNTA_ID no puede ser nulo
     @JsonBackReference //parte de la relazion que no debe ser serializada
@@ -25,11 +25,11 @@ public class Puntuacion {
         this.id = id;
     }
 
-    public String getPuntuacion() {
+    public int getPuntuacion() {
         return puntuacion;
     }
 
-    public void setPuntuacion(String puntuacion) {
+    public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
     }
 

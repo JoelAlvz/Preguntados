@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.app.preguntados.controller.front.MenuController">
+
+<VBox alignment="BOTTOM_CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.MenuController">
+
     <children>
-        <Label text="Bienvenido al menú principal" layoutX="50" layoutY="50" />
-        <Button text="Jugar" layoutX="50" layoutY="100" onAction="#startGame" />
-        <Button text="Salir" layoutX="50" layoutY="150" onAction="#exitGame" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+              <Button onAction="#startGame" prefHeight="51.0" prefWidth="92.0" text="Jugar">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#ranking" prefHeight="51.0" prefWidth="92.0" text="Ranking">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#perfil" prefHeight="51.0" prefWidth="92.0" text="Mi Perfil">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+              <Button onAction="#exitGame" prefHeight="51.0" prefWidth="92.0" text="Cerrar Sesión">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
     </children>
-</AnchorPane>
+</VBox>

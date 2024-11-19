@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class PuntuacionDTO {
 
         private int id;
-        private String puntuacion;
+        private int puntuacion;
         private Usuario usuario;
 
     public int getId() {
@@ -18,11 +18,11 @@ public class PuntuacionDTO {
         this.id = id;
     }
 
-    public String getPuntuacion() {
+    public int getPuntuacion() {
         return puntuacion;
     }
 
-    public void setPuntuacion(String puntuacion) {
+    public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
     }
 

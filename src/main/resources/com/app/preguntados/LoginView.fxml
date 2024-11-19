@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="192.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.LoginController">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.LoginController">
     <children>
-        <Label layoutX="50" layoutY="50" text="Usuario" />
-        <TextField fx:id="usernameField" layoutX="120" layoutY="45" />
-        <Label layoutX="50" layoutY="100" text="Contraseña" />
-        <PasswordField fx:id="passwordField" layoutX="120" layoutY="95" />
-        <Button layoutX="68.0" layoutY="149.0" onAction="#inicioLogin" text="Iniciar sesión" />
-      <Button layoutX="175.0" layoutY="149.0" mnemonicParsing="false" onAction="#crearCuenta" text="Crear Cuenta" />
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+              <Label text="Usuario:" />
+              <TextField fx:id="usernameField">
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" />
+               </VBox.margin>
+            </TextField>
+              <Label text="Contraseña:">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </Label>
+              <PasswordField fx:id="passwordField">
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" />
+               </VBox.margin>
+            </PasswordField>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+              <Button onAction="#inicioLogin" text="Iniciar sesión">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#crearCuenta" text="Crear Cuenta">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
     </children>
-</AnchorPane>
+</VBox>

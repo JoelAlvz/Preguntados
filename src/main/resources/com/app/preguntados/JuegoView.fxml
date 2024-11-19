@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.JuegoController">
+   <children>
+      <Label fx:id="pregunta" text="Pregunta">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </VBox.margin>
+      </Label>
+      <Button mnemonicParsing="false" onAction="#empezar" text="Empezar" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="res1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta" prefHeight="70.0" prefWidth="200.0" text="Respuesta 1">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="res2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta" prefHeight="70.0" prefWidth="200.0" text="Respuesta 2">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="res3" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta" prefHeight="70.0" prefWidth="200.0" text="Respuesta 3">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="res4" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta" prefHeight="70.0" prefWidth="200.0" text="Respuesta 4">
+                     <HBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

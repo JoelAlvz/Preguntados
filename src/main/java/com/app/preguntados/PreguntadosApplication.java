@@ -47,7 +47,16 @@ public class PreguntadosApplication extends Application {
 		primaryStage.setTitle("Menú Principal");
 		primaryStage.show();
 	}
+	public static void showModoJuegoView() throws Exception {
+		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("ModoJuegoView.fxml"));
+		// Configurar controlador usando Spring
+		loader.setControllerFactory(springContext::getBean);
+		Parent root = loader.load();
 
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setTitle("Menú Modo Juego");
+		primaryStage.show();
+	}
 	public static void showRegisterView() throws Exception {
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("RegistroView.fxml"));
 		// Configurar controlador usando Spring
@@ -58,7 +67,16 @@ public class PreguntadosApplication extends Application {
 		primaryStage.setTitle("Registro");
 		primaryStage.show();
 	}
+	public static void showJuegoView() throws Exception {
+		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("JuegoView.fxml"));
+		// Configurar controlador usando Spring
+		loader.setControllerFactory(springContext::getBean);
+		Parent root = loader.load();
 
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setTitle("Juego");
+		primaryStage.show();
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}
