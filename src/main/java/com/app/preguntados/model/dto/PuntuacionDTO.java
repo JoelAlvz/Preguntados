@@ -8,6 +8,7 @@ public class PuntuacionDTO {
 
         private int id;
         private int puntuacion;
+        private int puntuacioncompe;
         private Usuario usuario;
 
     public int getId() {
@@ -24,6 +25,14 @@ public class PuntuacionDTO {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public int getPuntuacioncompe() {
+        return puntuacioncompe;
+    }
+
+    public void setPuntuacioncompe(int puntuacioncompe) {
+        this.puntuacioncompe = puntuacioncompe;
     }
 
     public Usuario getUsuario() {

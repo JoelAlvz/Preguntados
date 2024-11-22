@@ -1,12 +1,10 @@
 package com.app.preguntados.controller;
 
 import com.app.preguntados.api.IPreguntaService;
+import com.app.preguntados.model.Respuesta;
 import com.app.preguntados.model.dto.PreguntaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,12 @@ public class PreguntaController {
     @GetMapping(value= "/getAll")
     public List<PreguntaDTO> queryAllPreguntas(){
         return preguntaService.queryAllPreguntas();
+    }
+
+    @GetMapping("/{id}")
+    public PreguntaDTO obtenerPreguntaPorId(@PathVariable int id) {
+        PreguntaDTO preguntaDTO = new PreguntaDTO();
+        preguntaDTO.setId(id);
+        return preguntaService.queryPregunta(preguntaDTO);
     }
 }

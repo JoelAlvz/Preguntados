@@ -1,5 +1,6 @@
 package com.app.preguntados.api;
 
+import com.app.preguntados.model.Respuesta;
 import com.app.preguntados.model.dto.PreguntaDTO;
 
 import java.util.List;
