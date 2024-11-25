@@ -11,9 +11,12 @@ public class ModoJuegoController {
     @Autowired
     private UsuarioActual usuario;
 
+    private int modoJuego;
+
     @FXML
     public void lvfacil(ActionEvent actionEvent) throws Exception {
         if(usuario.usuarioActual()){
+            modoJuego = 1;
             PreguntadosApplication.showJuegoView();
         }else{
             System.out.println("error");
@@ -22,7 +25,7 @@ public class ModoJuegoController {
     @FXML
     public void lvavanzado(ActionEvent actionEvent) {
         if(usuario.puntuaciones()>100){
-
+            modoJuego = 1;
         }
     }
     @FXML

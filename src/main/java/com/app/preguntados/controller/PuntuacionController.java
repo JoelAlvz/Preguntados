@@ -5,9 +5,7 @@ import com.app.preguntados.api.IUsuarioService;
 import com.app.preguntados.model.dto.PuntuacionDTO;
 import com.app.preguntados.model.dto.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +14,28 @@ import java.util.List;
 public class PuntuacionController {
     @Autowired
     IPuntuacionService puntuacionService;
+    @Autowired
+    private IUsuarioService usuarioService;
 
     @GetMapping(value= "/getAll")
     public List<PuntuacionDTO> queryAllPuntuaciones(){
         return puntuacionService.queryAllPuntuaciones();
+    }
+    @PostMapping(value= "/insert")
+    public int insertPuntuacion(@RequestBody PuntuacionDTO puntuacionDTO) {
+        return puntuacionService.insertPuntuacion(puntuacionDTO);
+    }
+    @GetMapping("/usuario/{usuarioId}")
+    public List<PuntuacionDTO> getPuntuacionesByUsuario(@PathVariable int usuarioId) {
+        return puntuacionService.queryPuntuacionesByUsuario(usuarioId);
+    }
+    @PostMapping("/insertToUser/{usuarioId}")
+    public int insertPuntuacionToUsuario(@PathVariable int usuarioId, @RequestBody PuntuacionDTO puntuacionDTO) {
+        // Establece el usuario en el DTO
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(usuarioId); // Solo necesitamos el ID para asociar
+        puntuacionDTO.setUsuario(usuarioDTO);
+        // Inserta la puntuación
+        return puntuacionService.insertPuntuacion(puntuacionDTO);
     }
 }

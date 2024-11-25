@@ -18,7 +18,7 @@ public class Usuario {
     private String contraseña;
     @Column(name = "RANGO")
     private String rango;
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", orphanRemoval = true)
     @JsonManagedReference //controla la relacion entre preguntas y respuestas para no generar bucles
     private List<Puntuacion> puntuaciones;
 

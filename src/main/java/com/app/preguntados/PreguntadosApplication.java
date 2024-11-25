@@ -36,7 +36,16 @@ public class PreguntadosApplication extends Application {
 		primaryStage.setTitle("Login");
 		primaryStage.show();
 	}
+	public static void showFinJuegoView() throws Exception {
+			FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("FinJuegoView.fxml"));
+		// Configurar controlador usando Spring
+		loader.setControllerFactory(springContext::getBean);
+		Parent root = loader.load();
 
+		primaryStage.setScene(new Scene(root));
+		primaryStage.setTitle("Fin del juego");
+		primaryStage.show();
+	}
 	public static void showMenuView() throws Exception {
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("MenuView.fxml"));
 		// Configurar controlador usando Spring

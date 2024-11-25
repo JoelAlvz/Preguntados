@@ -9,7 +9,7 @@ public class PuntuacionDTO {
         private int id;
         private int puntuacion;
         private int puntuacioncompe;
-        private Usuario usuario;
+        private UsuarioDTO usuario;
 
     public int getId() {
         return id;
@@ -35,11 +35,11 @@ public class PuntuacionDTO {
         this.puntuacioncompe = puntuacioncompe;
     }
 
-    public Usuario getUsuario() {
+    public UsuarioDTO getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
 }

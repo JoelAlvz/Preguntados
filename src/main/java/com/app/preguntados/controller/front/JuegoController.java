@@ -1,7 +1,10 @@
 package com.app.preguntados.controller.front;
 
+import com.app.preguntados.PreguntadosApplication;
 import com.app.preguntados.controller.PreguntaController;
+import com.app.preguntados.controller.PuntuacionController;
 import com.app.preguntados.model.dto.PreguntaDTO;
+import com.app.preguntados.model.dto.PuntuacionDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,10 +41,17 @@ public class JuegoController implements Initializable {
 
     @Autowired
     private PreguntaController preguntas;
+    @Autowired
+    private UsuarioActual usuario;
+    @Autowired
+    private PuntuacionController puntuacionController;
 
+    PuntuacionDTO puntuacion;
+    private int sumaPuntuacion=0;
+    private int modoJuego= 1;
+    private int contadorAciertos;
     private PreguntaDTO preguntaDTO;
     private int contadorResp;
-    private int contadorAciertos;
     private int contadorComodin;
 
     private List<Integer> listaId = new ArrayList<>();
@@ -76,16 +86,34 @@ public class JuegoController implements Initializable {
         res2.setText(preguntaDTO.getRespuestas().get(1).getRespuesta());
         res3.setText(preguntaDTO.getRespuestas().get(2).getRespuesta());
         res4.setText(preguntaDTO.getRespuestas().get(3).getRespuesta());
-        contador.setText(contadorAciertos + "/10");
+        contador.setText(contadorResp + "/10");
 
     }
-    public void comodin(ActionEvent actionEvent) {
-        if (contadorResp<=10 && contadorComodin<3) {
+    public void comodin(ActionEvent actionEvent) throws Exception {
+        if (contadorResp<10 && contadorComodin<3) {
             contadorAciertos++;
             contadorComodin++;
+            contadorResp++;
             comodin.setText(String.valueOf(3-contadorComodin));
             nuevaPregunta();
+        }else {finJuego();}
+    }
+
+    public void finJuego() throws Exception {
+        if (modoJuego==1) {
+            sumaPuntuacion = contadorAciertos;
+        } else if (modoJuego==2) {
+            sumaPuntuacion = contadorAciertos * 2;
+        } else if (modoJuego==3) {
+            sumaPuntuacion = contadorAciertos * 3;
+        } else if (modoJuego==4) {
+            sumaPuntuacion = contadorAciertos * 4;
         }
+        puntuacion= new PuntuacionDTO();
+        puntuacion.setPuntuacion(sumaPuntuacion);
+        puntuacion.setPuntuacioncompe(0);
+        puntuacionController.insertPuntuacionToUsuario(usuario.getUsuario().getId(),puntuacion);
+        PreguntadosApplication.showFinJuegoView();
     }
 
     @FXML
@@ -94,6 +122,7 @@ public class JuegoController implements Initializable {
             nuevaPregunta();
             contadorResp=0;
             contadorComodin=0;
+            listaId.clear();
             comodin.setText("3");
             contador.setText(contadorAciertos+"/10");
             empezar.setVisible(false);
@@ -103,48 +132,46 @@ public class JuegoController implements Initializable {
     }
 
     @FXML
-    public void respuesta1(ActionEvent actionEvent) {
-        if (contadorResp<=10) {
+    public void respuesta1(ActionEvent actionEvent) throws Exception {
+        if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(0).getVerdadera()) {
                 contadorAciertos++;
             }
             contadorResp++;
             nuevaPregunta();
-        }
+        }else {finJuego();}
     }
 
     @FXML
-    public void respuesta2(ActionEvent actionEvent) {
-        if (contadorResp<=10) {
+    public void respuesta2(ActionEvent actionEvent) throws Exception {
+        if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(1).getVerdadera()) {
                 contadorAciertos++;
             }
             contadorResp++;
             nuevaPregunta();
-        }
+        }else {finJuego();}
     }
 
     @FXML
-    public void respuesta3(ActionEvent actionEvent) {
-        if (contadorResp<=10) {
+    public void respuesta3(ActionEvent actionEvent) throws Exception {
+        if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(2).getVerdadera()) {
                 contadorAciertos++;
             }
             contadorResp++;
             nuevaPregunta();
-        }
+        }else {finJuego();}
     }
 
     @FXML
-    public void respuesta4(ActionEvent actionEvent) {
-        if (contadorResp<=10) {
+    public void respuesta4(ActionEvent actionEvent) throws Exception {
+        if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(3).getVerdadera()) {
                 contadorAciertos++;
             }
             contadorResp++;
             nuevaPregunta();
-        }
+        }else {finJuego();}
     }
-
-
 }

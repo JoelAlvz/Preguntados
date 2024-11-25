@@ -10,4 +10,5 @@ public interface IPuntuacionService {
     int insertPuntuacion(PuntuacionDTO puntuacionDTO);
     int updatePuntuacion(PuntuacionDTO puntuacionDTO);
     int deletePuntuacion(PuntuacionDTO puntuacionDTO);
+    List<PuntuacionDTO> queryPuntuacionesByUsuario(int usuarioId);
 }
