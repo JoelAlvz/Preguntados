@@ -59,6 +59,7 @@ public class FinJuegoController implements Initializable {
     //Establece la suma de todas las puntuaciones y la puntuacion y aciertos de esta partida
     public void calcularPuntuacion(){
         int cont = 0;
+        sumaPuntos=0;
         for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())){
             sumaPuntos = sumaPuntos + puntos.getPuntuacion();
             if ( (puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size()-1)==cont){

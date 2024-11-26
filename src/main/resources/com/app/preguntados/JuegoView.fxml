@@ -41,7 +41,7 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="preguntaLabel" contentDisplay="TOP">
+            <Label fx:id="preguntaLabel" contentDisplay="TOP" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
