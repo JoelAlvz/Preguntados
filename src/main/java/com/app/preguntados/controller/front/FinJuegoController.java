@@ -37,13 +37,14 @@ public class FinJuegoController implements Initializable {
 
     private int modoJuego=1;
 
-    private int contadorAciertos=1;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         calcularPuntuacion();
 
-        aciertosLabel.setText(String.valueOf(contadorAciertos));
+
         puntuacionTotal.setText(String.valueOf(sumaPuntos));
         if (modoJuego==1){
             dificultadLabel.setText("Facil");
@@ -55,12 +56,15 @@ public class FinJuegoController implements Initializable {
             dificultadLabel.setText("Maestro");
         }
     }
-    //Devuelve la suma de todas las puntuaciones y la puntuacion de esta partida
+    //Establece la suma de todas las puntuaciones y la puntuacion y aciertos de esta partida
     public void calcularPuntuacion(){
         int cont = 0;
         for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())){
             sumaPuntos = sumaPuntos + puntos.getPuntuacion();
             if ( (puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size()-1)==cont){
+                aciertosLabel.setText(String.valueOf(puntos.getPuntuacion()));
+
+
                 puntuacionLabel.setText(String.valueOf(puntos.getPuntuacion()));
             }
             cont++;

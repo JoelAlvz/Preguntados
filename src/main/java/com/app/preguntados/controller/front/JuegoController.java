@@ -10,8 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,21 +26,11 @@ import java.util.ResourceBundle;
 @Component
 public class JuegoController implements Initializable {
     @FXML
-    private Label preguntaLabel;
+    private Label preguntaLabel, contador;
     @FXML
-    private Button res1;
+    private Button res1, res2, res3, res4, empezar, comodin;
     @FXML
-    private Button res2;
-    @FXML
-    private Button res3;
-    @FXML
-    private Button res4;
-    @FXML
-    private Button empezar;
-    @FXML
-    private Button comodin;
-    @FXML
-    private Label contador;
+    private ImageView corazon1,corazon2, corazon3;
 
     @Autowired
     private PreguntaController preguntas;
@@ -53,7 +46,9 @@ public class JuegoController implements Initializable {
     private PreguntaDTO preguntaDTO;
     private int contadorResp;
     private int contadorComodin;
+    private int vidas;
 
+    Image coranzonSinVida = new Image("/com/app/preguntados/Imagenes/corazonSinVida.png");
     private List<Integer> listaId = new ArrayList<>();
 
     @Override
@@ -89,6 +84,22 @@ public class JuegoController implements Initializable {
         contador.setText(contadorResp + "/10");
 
     }
+    public void vidasRestantes() throws Exception {
+
+        if(vidas==3){
+            corazon1.setImage(coranzonSinVida);
+        } else if (vidas ==2) {
+            corazon2.setImage(coranzonSinVida);
+        } else if (vidas==1) {
+            corazon3.setImage(coranzonSinVida);
+        } else if (vidas==0) {
+            contadorAciertos=0;
+            finJuego();
+        }
+
+
+    }
+
     public void comodin(ActionEvent actionEvent) throws Exception {
         if (contadorResp<10 && contadorComodin<3) {
             contadorAciertos++;
@@ -96,10 +107,15 @@ public class JuegoController implements Initializable {
             contadorResp++;
             comodin.setText(String.valueOf(3-contadorComodin));
             nuevaPregunta();
-        }else {finJuego();}
+        }
+        if (contadorResp==10){
+
+           finJuego();
+        }
     }
 
     public void finJuego() throws Exception {
+
         if (modoJuego==1) {
             sumaPuntuacion = contadorAciertos;
         } else if (modoJuego==2) {
@@ -109,16 +125,18 @@ public class JuegoController implements Initializable {
         } else if (modoJuego==4) {
             sumaPuntuacion = contadorAciertos * 4;
         }
-        puntuacion= new PuntuacionDTO();
+        puntuacion = new PuntuacionDTO();
         puntuacion.setPuntuacion(sumaPuntuacion);
         puntuacion.setPuntuacioncompe(0);
-        puntuacionController.insertPuntuacionToUsuario(usuario.getUsuario().getId(),puntuacion);
+        puntuacionController.insertPuntuacionToUsuario(usuario.getUsuario().getId(), puntuacion);
+
         PreguntadosApplication.showFinJuegoView();
     }
 
     @FXML
     public void empezar(ActionEvent actionEvent) {
             contadorAciertos=0;
+            vidas=3;
             nuevaPregunta();
             contadorResp=0;
             contadorComodin=0;
@@ -136,10 +154,14 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(0).getVerdadera()) {
                 contadorAciertos++;
-            }
+            }else{vidasRestantes(); vidas--;}
             contadorResp++;
+            if (contadorResp==10){
+
+                finJuego();
+            }
             nuevaPregunta();
-        }else {finJuego();}
+        }
     }
 
     @FXML
@@ -147,10 +169,14 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(1).getVerdadera()) {
                 contadorAciertos++;
-            }
+            }else{vidasRestantes(); vidas--;}
             contadorResp++;
+            if (contadorResp==10){
+
+                finJuego();
+            }
             nuevaPregunta();
-        }else {finJuego();}
+        }
     }
 
     @FXML
@@ -158,10 +184,14 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(2).getVerdadera()) {
                 contadorAciertos++;
-            }
+            }else{vidasRestantes(); vidas--;}
             contadorResp++;
+            if (contadorResp==10){
+
+                finJuego();
+            }
             nuevaPregunta();
-        }else {finJuego();}
+        }
     }
 
     @FXML
@@ -169,9 +199,13 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(3).getVerdadera()) {
                 contadorAciertos++;
-            }
+            }else{vidasRestantes(); vidas--;}
             contadorResp++;
+            if (contadorResp==10){
+
+                finJuego();
+            }
             nuevaPregunta();
-        }else {finJuego();}
+        }
     }
 }
