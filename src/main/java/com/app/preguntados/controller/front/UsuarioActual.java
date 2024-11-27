@@ -8,11 +8,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class UsuarioActual {
     private UsuarioDTO usuario;
+    private int modoJuego;
+
+    public int getModoJuego() {
+        return modoJuego;
+    }
+
+    public void setModoJuego(int modoJuego) {
+        this.modoJuego = modoJuego;
+    }
 
     public UsuarioDTO getUsuario() {
         return usuario;
     }
-
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }

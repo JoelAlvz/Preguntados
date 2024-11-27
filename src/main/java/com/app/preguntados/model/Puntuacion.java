@@ -1,6 +1,7 @@
 package com.app.preguntados.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,7 +17,7 @@ public class Puntuacion {
     private int puntuacioncompe;
     @ManyToOne
     @JoinColumn(name = "USUARIO_ID", nullable = false) // "nullable = false" PREGUNTA_ID no puede ser nulo
-    @JsonBackReference //parte de la relazion que no debe ser serializada
+    @JsonIgnore//parte de la relazion que no debe ser serializada
     private Usuario usuario;
 
     public int getId() {

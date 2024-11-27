@@ -16,6 +16,8 @@ public class ModoJuegoController {
     @FXML
     public void lvfacil(ActionEvent actionEvent) throws Exception {
         if(usuario.usuarioActual()){
+
+            usuario.setModoJuego(1);
             modoJuego = 1;
             PreguntadosApplication.showJuegoView();
         }else{

@@ -75,13 +75,17 @@ public class JuegoController implements Initializable {
         return preguntas.obtenerPreguntaPorId(id);
     }
     public void nuevaPregunta(){
-        preguntaDTO = pregunta();
+        if(usuario.getModoJuego()==1){
+            do {preguntaDTO=pregunta();}while (!preguntaDTO.getDificultad().equals("facil"));
+        }
         preguntaLabel.setText(preguntaDTO.getPregunta());
         res1.setText(preguntaDTO.getRespuestas().get(0).getRespuesta());
         res2.setText(preguntaDTO.getRespuestas().get(1).getRespuesta());
         res3.setText(preguntaDTO.getRespuestas().get(2).getRespuesta());
         res4.setText(preguntaDTO.getRespuestas().get(3).getRespuesta());
         contador.setText(contadorResp + "/10");
+
+
 
     }
     public void vidasRestantes() throws Exception {
