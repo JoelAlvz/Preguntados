@@ -126,6 +126,37 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/db</directory>
+									<filtering>false</filtering>
+								</resource>
+								<resource>
+									<directory>${basedir}</directory> <!-- Usamos la raíz del proyecto -->
+									<includes>
+										<include>hsqldb-2.7.2.jar</include> <!-- El archivo JAR de HSQLDB -->
+									</includes>
+									<filtering>false</filtering>
+									<targetPath>lib</targetPath> <!-- Esto copia el JAR a target/lib -->
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<profiles>

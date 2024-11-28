@@ -10,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.io.IOException;
+
 @SpringBootApplication
 public class PreguntadosApplication extends Application {
 	private static ApplicationContext springContext;
@@ -17,6 +19,13 @@ public class PreguntadosApplication extends Application {
 
 	@Override
 	public void init() throws Exception {
+		try {
+			ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "start.bat");
+			processBuilder.start();
+			System.out.println("Script start.bat ejecutado correctamente.");
+		} catch (IOException e) {
+			System.err.println("Error al ejecutar el script start.bat: " + e.getMessage());
+		}
 		// Inicializa el contexto de Spring
 		springContext = SpringApplication.run(PreguntadosApplication.class);
 	}
