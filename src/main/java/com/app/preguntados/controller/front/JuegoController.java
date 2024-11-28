@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 
@@ -47,8 +49,9 @@ public class JuegoController implements Initializable {
     private int contadorResp;
     private int contadorComodin;
     private int vidas;
+    private static Image coranzonSinVida;
+    private static Image coranzonConVida;
 
-    Image coranzonSinVida = new Image("/com/app/preguntados/Imagenes/corazonSinVida.png");
     private List<Integer> listaId = new ArrayList<>();
 
     @Override
@@ -59,6 +62,14 @@ public class JuegoController implements Initializable {
         res2.setDisable(true);
         res3.setDisable(true);
         res4.setDisable(true);
+
+    }
+
+
+    public static void initGraphics() {
+        coranzonSinVida = new Image(JuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/corazonSinVida.png").toExternalForm());
+        coranzonConVida = new Image(JuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/corazonSano.png").toExternalForm());
+        System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
     }
 
     // Devuelve una pregunta aleatoria por su id
@@ -151,6 +162,9 @@ public class JuegoController implements Initializable {
             contador.setVisible(true);
             comodin.setVisible(true);
             preguntaLabel.setWrapText(true);
+            corazon1.setImage(coranzonConVida);
+            corazon2.setImage(coranzonConVida);
+            corazon3.setImage(coranzonConVida);
     }
 
     @FXML
