@@ -73,6 +73,11 @@ public class FinJuegoController implements Initializable {
     }
     @FXML
     public void reiniciar(ActionEvent actionEvent) throws Exception {
+        sumaPuntos=0;
+        for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())){
+            sumaPuntos += puntos.getPuntuacion();
+        }
+        modoJuegoController.iniciarBotones();
         PreguntadosApplication.showJuegoView();
     }
 

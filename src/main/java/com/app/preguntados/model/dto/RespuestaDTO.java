@@ -1,7 +1,6 @@
 package com.app.preguntados.model.dto;
 
 import com.app.preguntados.model.Pregunta;
-import jakarta.persistence.Column;
 
 public class RespuestaDTO {
 
@@ -9,6 +8,17 @@ public class RespuestaDTO {
     private String respuesta;
     private Boolean verdadera;
     private Pregunta pregunta;
+    private int preguntaId;
+    public RespuestaDTO() {
+    }
+
+    public RespuestaDTO(String respuesta, Boolean verdadera, int preguntaId) {
+
+        this.respuesta = respuesta;
+        this.verdadera = verdadera;
+        this.pregunta = pregunta;
+    }
+
     public int getId() {
         return id;
     }

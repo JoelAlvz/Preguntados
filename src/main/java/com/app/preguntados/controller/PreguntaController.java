@@ -48,5 +48,10 @@ public class PreguntaController {
         }
         return listaPreguntas;
     }
+    @PostMapping("/insertar")
+    public int insertarPregunta(@RequestBody PreguntaDTO nuevaPregunta) {
 
+          return preguntaService.insertPregunta(nuevaPregunta);
+
+    }
 }

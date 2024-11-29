@@ -3,8 +3,10 @@ package com.app.preguntados.service;
 import com.app.preguntados.api.IRespuestaService;
 
 
+import com.app.preguntados.model.Pregunta;
 import com.app.preguntados.model.Respuesta;
 
+import com.app.preguntados.model.dao.PreguntaDao;
 import com.app.preguntados.model.dao.RespuestaDao;
 import com.app.preguntados.model.dto.RespuestaDTO;
 
@@ -20,6 +22,8 @@ import java.util.List;
 public class RespuestaService implements IRespuestaService {
     @Autowired
     private RespuestaDao respuestaDao;
+    @Autowired
+    private PreguntaDao preguntaDao;
     @Transactional
     @Override
     public RespuestaDTO queryRespuesta(RespuestaDTO respuestaDTO) {
@@ -51,4 +55,21 @@ public class RespuestaService implements IRespuestaService {
         respuestaDao.delete(respuesta);
         return id;
     }
+
+    @Override
+    public void insertRespuestaParaPregunta(int preguntaId, RespuestaDTO respuestaDTO) {
+        Pregunta pregunta = preguntaDao.findById(preguntaId)
+                .orElseThrow(() -> new RuntimeException("Pregunta no encontrada con ID: " + preguntaId));
+
+        // Crear el objeto Respuesta a partir del DTO
+        Respuesta respuesta = new Respuesta();
+        respuesta.setRespuesta(respuestaDTO.getRespuesta());
+        respuesta.setVerdadera(respuestaDTO.getVerdadera());
+        respuesta.setPregunta(pregunta);
+
+        // Guardar en la base de datos
+        respuestaDao.save(respuesta);
+    }
+
+
 }

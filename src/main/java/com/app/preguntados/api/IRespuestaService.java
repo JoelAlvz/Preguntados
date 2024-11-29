@@ -10,4 +10,6 @@ public interface IRespuestaService {
     int insertRespuesta(RespuestaDTO respuestaDTO);
     int updateRespuesta(RespuestaDTO respuestaDTO);
     int deleteRespuesta(RespuestaDTO respuestaDTO);
+    void insertRespuestaParaPregunta(int preguntaId, RespuestaDTO respuestaDTO);
+
 }

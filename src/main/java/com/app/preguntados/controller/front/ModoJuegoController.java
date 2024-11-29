@@ -76,7 +76,8 @@ public class ModoJuegoController implements Initializable {
         }
     }
     @FXML
-    public void lvmaestro(ActionEvent actionEvent) {
+    public void lvmaestro(ActionEvent actionEvent) throws Exception {
+        PreguntadosApplication.showContadorView();
     }
     @FXML
     public void volver(ActionEvent actionEvent) throws Exception {

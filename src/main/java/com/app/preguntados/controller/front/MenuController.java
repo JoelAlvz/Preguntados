@@ -12,10 +12,12 @@ public class MenuController {
         System.out.println("Comenzar juego...");
         PreguntadosApplication.showModoJuegoView();
     }
-    @FXML
-    public void ranking(ActionEvent actionEvent) {
 
+    @FXML
+    public void nuevasPreguntas(ActionEvent actionEvent) throws Exception {
+        PreguntadosApplication.showNuevasPreguntasView();
     }
+
     @FXML
     public void perfil(ActionEvent actionEvent) {
 
@@ -25,4 +27,6 @@ public class MenuController {
     private void exitGame() {
         System.exit(0);
     }
+
+
 }
