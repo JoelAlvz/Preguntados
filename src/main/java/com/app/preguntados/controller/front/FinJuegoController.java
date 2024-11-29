@@ -32,6 +32,8 @@ public class FinJuegoController implements Initializable {
     private UsuarioActual usuarioActual;
     @Autowired
     private PuntuacionController puntuacion;
+    @Autowired
+    private ModoJuegoController modoJuegoController;
 
     private int sumaPuntos;
 
@@ -64,8 +66,6 @@ public class FinJuegoController implements Initializable {
             sumaPuntos = sumaPuntos + puntos.getPuntuacion();
             if ( (puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size()-1)==cont){
                 aciertosLabel.setText(String.valueOf(puntos.getPuntuacion()));
-
-
                 puntuacionLabel.setText(String.valueOf(puntos.getPuntuacion()));
             }
             cont++;
@@ -78,6 +78,11 @@ public class FinJuegoController implements Initializable {
 
     @FXML
     public void volver(ActionEvent actionEvent) throws Exception {
+        sumaPuntos=0;
+        for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())){
+            sumaPuntos += puntos.getPuntuacion();
+        }
+        modoJuegoController.iniciarBotones();
         PreguntadosApplication.showMenuView();
     }
 

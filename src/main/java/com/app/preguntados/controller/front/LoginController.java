@@ -30,12 +30,11 @@ public class LoginController {
         // Recorremos la lista de usuarios y verificamos si alguno tiene el nombre y la contraseña correctos
         for (UsuarioDTO usuario : usuarios) {
             if (usuario.getNombre().equals(username) && usuario.getContraseña().equals(password)) {
-                usuarioActual.setUsuario(usuario); // guardamos el usuario
-                return true; // Si encontramos un usuario con las credenciales correctas, retornamos true
+                usuarioActual.setUsuario(usuario);
+                return true;
             }
         }
 
-        // Si no encontramos ninguna coincidencia, retornamos false
         return false;
     }
 

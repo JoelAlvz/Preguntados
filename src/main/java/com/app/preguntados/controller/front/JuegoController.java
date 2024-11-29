@@ -41,6 +41,7 @@ public class JuegoController implements Initializable {
     @Autowired
     private PuntuacionController puntuacionController;
 
+
     PuntuacionDTO puntuacion;
     private int sumaPuntuacion=0;
     private int modoJuego= 1;
@@ -62,7 +63,6 @@ public class JuegoController implements Initializable {
         res2.setDisable(true);
         res3.setDisable(true);
         res4.setDisable(true);
-
     }
 
 
@@ -76,8 +76,8 @@ public class JuegoController implements Initializable {
     public PreguntaDTO pregunta(){
         Random aleatorio = new Random();
         int id;
-        do{id = aleatorio.nextInt(preguntas.queryAllPreguntas().size())+1;}
-        while (listaId.contains(id));
+        do{id = aleatorio.nextInt(preguntas.queryAllPreguntas().size())+1;
+        } while (listaId.contains(id));
         listaId.add(id);
         res1.setDisable(false);
         res2.setDisable(false);
@@ -85,9 +85,16 @@ public class JuegoController implements Initializable {
         res4.setDisable(false);
         return preguntas.obtenerPreguntaPorId(id);
     }
+
+
     public void nuevaPregunta(){
+
         if(usuario.getModoJuego()==1){
             do {preguntaDTO=pregunta();}while (!preguntaDTO.getDificultad().equals("facil"));
+        }else if (usuario.getModoJuego()==2) {
+            do {preguntaDTO=pregunta();}while (!preguntaDTO.getDificultad().equals("medio"));
+        } else if (usuario.getModoJuego()==3) {
+            do {preguntaDTO=pregunta();}while (!preguntaDTO.getDificultad().equals("dificil"));
         }
         preguntaLabel.setText(preguntaDTO.getPregunta());
         res1.setText(preguntaDTO.getRespuestas().get(0).getRespuesta());
@@ -95,9 +102,6 @@ public class JuegoController implements Initializable {
         res3.setText(preguntaDTO.getRespuestas().get(2).getRespuesta());
         res4.setText(preguntaDTO.getRespuestas().get(3).getRespuesta());
         contador.setText(contadorResp + "/10");
-
-
-
     }
     public void vidasRestantes() throws Exception {
 
@@ -111,7 +115,6 @@ public class JuegoController implements Initializable {
             contadorAciertos=0;
             finJuego();
         }
-
 
     }
 
@@ -131,13 +134,13 @@ public class JuegoController implements Initializable {
 
     public void finJuego() throws Exception {
 
-        if (modoJuego==1) {
+        if (usuario.getModoJuego()==1) {
             sumaPuntuacion = contadorAciertos;
-        } else if (modoJuego==2) {
+        } else if (usuario.getModoJuego()==2) {
             sumaPuntuacion = contadorAciertos * 2;
-        } else if (modoJuego==3) {
+        } else if (usuario.getModoJuego()==3) {
             sumaPuntuacion = contadorAciertos * 3;
-        } else if (modoJuego==4) {
+        } else if (usuario.getModoJuego()==4) {
             sumaPuntuacion = contadorAciertos * 4;
         }
         puntuacion = new PuntuacionDTO();
