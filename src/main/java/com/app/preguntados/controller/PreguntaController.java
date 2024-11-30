@@ -52,6 +52,12 @@ public class PreguntaController {
     public int insertarPregunta(@RequestBody PreguntaDTO nuevaPregunta) {
 
           return preguntaService.insertPregunta(nuevaPregunta);
+    }
 
+    @DeleteMapping(value = "/deleteByPregunta/{pregunta}")
+    public void deletePreguntaByNombre(@PathVariable String nombre) {
+        PreguntaDTO preguntaDTO = new PreguntaDTO();
+        preguntaDTO.setPregunta(nombre);
+        preguntaService.deletePreguntaByNombre(preguntaDTO);
     }
 }

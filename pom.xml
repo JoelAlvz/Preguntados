@@ -130,12 +130,12 @@
 									<filtering>false</filtering>
 								</resource>
 								<resource>
-									<directory>${basedir}</directory> <!-- Usamos la raíz del proyecto -->
+									<directory>${basedir}</directory>
 									<includes>
-										<include>hsqldb-2.7.2.jar</include> <!-- El archivo JAR de HSQLDB -->
+										<include>hsqldb-2.7.2.jar</include>
 									</includes>
 									<filtering>false</filtering>
-									<targetPath>lib</targetPath> <!-- Esto copia el JAR a target/lib -->
+									<targetPath>lib</targetPath>
 								</resource>
 							</resources>
 						</configuration>

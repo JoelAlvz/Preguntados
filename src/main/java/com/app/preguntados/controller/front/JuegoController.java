@@ -33,6 +33,8 @@ public class JuegoController implements Initializable {
     private Button res1, res2, res3, res4, empezar, comodin;
     @FXML
     private ImageView corazon1,corazon2, corazon3;
+    @FXML
+    private Label usuarioLabel,puntuacionActualLabel,puntuacionTotalLabel;
 
     @Autowired
     private PreguntaController preguntas;
@@ -44,12 +46,12 @@ public class JuegoController implements Initializable {
 
     PuntuacionDTO puntuacion;
     private int sumaPuntuacion=0;
-    private int modoJuego= 1;
     private int contadorAciertos;
     private PreguntaDTO preguntaDTO;
     private int contadorResp;
     private int contadorComodin;
     private int vidas;
+    private int sumaPuntos=0;
     private static Image coranzonSinVida;
     private static Image coranzonConVida;
 
@@ -63,6 +65,12 @@ public class JuegoController implements Initializable {
         res2.setDisable(true);
         res3.setDisable(true);
         res4.setDisable(true);
+        usuarioLabel.setText(usuario.getUsuario().getNombre());
+        sumaPuntos=0;
+        for (PuntuacionDTO puntos : puntuacionController.getPuntuacionesByUsuario(usuario.getUsuario().getId())){
+            sumaPuntos = sumaPuntos + puntos.getPuntuacion();
+        }
+        puntuacionTotalLabel.setText(String.valueOf(sumaPuntos));
     }
 
 
@@ -124,6 +132,7 @@ public class JuegoController implements Initializable {
             contadorComodin++;
             contadorResp++;
             comodin.setText(String.valueOf(3-contadorComodin));
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
             nuevaPregunta();
         }
         if (contadorResp==10){
@@ -140,8 +149,6 @@ public class JuegoController implements Initializable {
             sumaPuntuacion = contadorAciertos * 2;
         } else if (usuario.getModoJuego()==3) {
             sumaPuntuacion = contadorAciertos * 3;
-        } else if (usuario.getModoJuego()==4) {
-            sumaPuntuacion = contadorAciertos * 4;
         }
         puntuacion = new PuntuacionDTO();
         puntuacion.setPuntuacion(sumaPuntuacion);
@@ -181,6 +188,7 @@ public class JuegoController implements Initializable {
 
                 finJuego();
             }
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
             nuevaPregunta();
         }
     }
@@ -196,6 +204,7 @@ public class JuegoController implements Initializable {
 
                 finJuego();
             }
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
             nuevaPregunta();
         }
     }
@@ -211,6 +220,7 @@ public class JuegoController implements Initializable {
 
                 finJuego();
             }
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
             nuevaPregunta();
         }
     }
@@ -226,6 +236,7 @@ public class JuegoController implements Initializable {
 
                 finJuego();
             }
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
             nuevaPregunta();
         }
     }

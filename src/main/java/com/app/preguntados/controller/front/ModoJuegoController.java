@@ -23,23 +23,25 @@ public class ModoJuegoController implements Initializable {
     @FXML
     private Button facil, medio, avanzado;
 
-    private int sumaPuntos=0;
+    private int sumaPuntos;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        sumaPuntos=0;
         medio.setDisable(true);
         avanzado.setDisable(true);
         for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuario.getUsuario().getId())){
             sumaPuntos += puntos.getPuntuacion();
         }
+        System.out.println(sumaPuntos);
         iniciarBotones();
     }
 
     public void iniciarBotones(){
-        if (sumaPuntos>30){
+        if (sumaPuntos>50){
             medio.setDisable(false);
-        }else if (sumaPuntos>200){
+        }
+        if (sumaPuntos>150){
             avanzado.setDisable(false);
         }
         System.out.println(puntuacion);
@@ -77,7 +79,14 @@ public class ModoJuegoController implements Initializable {
     }
     @FXML
     public void lvmaestro(ActionEvent actionEvent) throws Exception {
-        PreguntadosApplication.showContadorView();
+        if(usuario.usuarioActual()){
+            usuario.setModoJuego(4);
+            PreguntadosApplication.showContadorView();
+
+        }else{
+            System.out.println("error");
+        }
+
     }
     @FXML
     public void volver(ActionEvent actionEvent) throws Exception {

@@ -33,7 +33,7 @@ public class PuntuacionController {
     public int insertPuntuacionToUsuario(@PathVariable int usuarioId, @RequestBody PuntuacionDTO puntuacionDTO) {
         // Establece el usuario en el DTO
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setId(usuarioId); // Solo necesitamos el ID para asociar
+        usuarioDTO.setId(usuarioId); // necesita el ID para asociar
         puntuacionDTO.setUsuario(usuarioDTO);
         // Inserta la puntuación
         return puntuacionService.insertPuntuacion(puntuacionDTO);

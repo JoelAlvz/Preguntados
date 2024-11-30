@@ -26,7 +26,8 @@ public class FinJuegoController implements Initializable {
     @FXML
     private Label dificultadLabel;
     @FXML
-    private Label puntuacionTotal;
+    private Label puntuacionTotal,textoPuntuacion;
+
 
     @Autowired
     private UsuarioActual usuarioActual;
@@ -37,38 +38,59 @@ public class FinJuegoController implements Initializable {
 
     private int sumaPuntos;
 
-    private int modoJuego=1;
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         calcularPuntuacion();
 
-
         puntuacionTotal.setText(String.valueOf(sumaPuntos));
-        if (modoJuego==1){
+
+    }
+
+    public int calcularAciertos(int puntos){
+        if (usuarioActual.getModoJuego()==1){
             dificultadLabel.setText("Facil");
-        } else if (modoJuego==2) {
+        } else if (usuarioActual.getModoJuego()==2) {
             dificultadLabel.setText("Media");
-        }else if (modoJuego==3){
+            puntos = puntos / 2;
+        }else if (usuarioActual.getModoJuego()==3){
             dificultadLabel.setText("Avanzada");
-        } else if (modoJuego==4) {
+            puntos = puntos / 3;
+        } else if (usuarioActual.getModoJuego()==4) {
             dificultadLabel.setText("Maestro");
         }
+        return puntos;
     }
+
     //Establece la suma de todas las puntuaciones y la puntuacion y aciertos de esta partida
     public void calcularPuntuacion(){
         int cont = 0;
         sumaPuntos=0;
-        for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())){
-            sumaPuntos = sumaPuntos + puntos.getPuntuacion();
-            if ( (puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size()-1)==cont){
-                aciertosLabel.setText(String.valueOf(puntos.getPuntuacion()));
-                puntuacionLabel.setText(String.valueOf(puntos.getPuntuacion()));
+        int maximaPuntuacion=0;
+        if(usuarioActual.getModoJuego()<4) {
+            for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())) {
+                sumaPuntos += puntos.getPuntuacion();
+                if ((puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size() - 1) == cont) {
+                    aciertosLabel.setText(String.valueOf(calcularAciertos(puntos.getPuntuacion())));
+                    puntuacionLabel.setText(String.valueOf(puntos.getPuntuacion()));
+                }
+                cont++;
             }
-            cont++;
+        }else{
+
+            for (PuntuacionDTO puntos : puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId())) {
+                sumaPuntos += puntos.getPuntuacioncompe();
+                if(puntos.getPuntuacioncompe()>maximaPuntuacion){
+                    maximaPuntuacion=puntos.getPuntuacioncompe();
+                }
+                if ((puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size() - 1) == cont) {
+                    aciertosLabel.setText(String.valueOf(calcularAciertos(puntos.getPuntuacioncompe())));
+
+                }
+                cont++;
+            }
+            textoPuntuacion.setText("PUNTUACIÓN MÁXIMA:");
+            puntuacionLabel.setText(String.valueOf(maximaPuntuacion));
         }
     }
     @FXML
@@ -78,7 +100,8 @@ public class FinJuegoController implements Initializable {
             sumaPuntos += puntos.getPuntuacion();
         }
         modoJuegoController.iniciarBotones();
-        PreguntadosApplication.showJuegoView();
+        if (usuarioActual.getModoJuego()<4){
+        PreguntadosApplication.showJuegoView();}else {PreguntadosApplication.showContadorView();}
     }
 
     @FXML

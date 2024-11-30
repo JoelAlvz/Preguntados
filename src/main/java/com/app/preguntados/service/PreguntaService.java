@@ -2,7 +2,6 @@ package com.app.preguntados.service;
 
 import com.app.preguntados.api.IPreguntaService;
 import com.app.preguntados.model.Pregunta;
-import com.app.preguntados.model.Respuesta;
 import com.app.preguntados.model.dao.PreguntaDao;
 import com.app.preguntados.model.dto.PreguntaDTO;
 import com.app.preguntados.model.dto.dtomapper.PreguntaMapper;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("PreguntaService")
 @Lazy
@@ -49,5 +49,19 @@ public class PreguntaService implements IPreguntaService {
         Pregunta pregunta = PreguntaMapper.INSTANCE.toEntity(preguntaDTO);
         preguntaDao.delete(pregunta);
         return id;
+    }
+
+    @Transactional
+    @Override
+    public int deletePreguntaByNombre(PreguntaDTO preguntaDTO) {
+        String nombre = preguntaDTO.getPregunta();
+        Optional<Pregunta> preguntaOptional = preguntaDao.findByPregunta(nombre);
+
+        if (preguntaOptional.isPresent()) {
+            preguntaDao.delete(preguntaOptional.get());
+            return preguntaOptional.get().getId();
+        } else {
+            throw new RuntimeException("Pregunta '" + nombre + "' no encontrada.");
+        }
     }
 }

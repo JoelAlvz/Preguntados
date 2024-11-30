@@ -25,5 +25,16 @@ public class UsuarioController {
         // Llamamos al servicio para insertar el usuario y devolver su id
         return usuarioService.insertUsuario(usuarioDTO);
     }
+    @PutMapping(value = "/update")
+    public int updateUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+        return usuarioService.updateUsuario(usuarioDTO);
+    }
+
+    @DeleteMapping(value = "/deleteByNombre/{nombre}")
+    public void deleteUsuarioByNombre(@PathVariable String nombre) {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setNombre(nombre);
+        usuarioService.deleteUsuarioByNombre(usuarioDTO);
+    }
 
 }

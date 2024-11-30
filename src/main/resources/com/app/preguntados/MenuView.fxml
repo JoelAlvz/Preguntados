@@ -20,7 +20,7 @@
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#perfil" prefHeight="40.0" prefWidth="146.0" text="Mi Perfil">
+            <Button mnemonicParsing="false" onAction="#borrarPregunta" prefHeight="40.0" prefWidth="146.0" text="Lista preguntas">
                <HBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>

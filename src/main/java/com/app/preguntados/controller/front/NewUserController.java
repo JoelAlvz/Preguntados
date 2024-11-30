@@ -23,18 +23,17 @@ public class NewUserController {
     @FXML
     private TextField usernameField;
     @FXML
-    private PasswordField passwordField;
-    @FXML
-    private PasswordField passwordRepeatField;
+    private TextField usernameRepeatField;
+
 
     @FXML
     public void crearCuenta(ActionEvent actionEvent) throws Exception {
         boolean validador = false;
         //Comprueba que no haya campos vacios y que las contraseñas sean la misma
-        if (!usernameField.getText().isEmpty() && !passwordField.getText().isEmpty()) {
-            if(passwordField.getText().equals(passwordRepeatField.getText())) {
+        if (!usernameField.getText().isEmpty()) {
+            if(usernameField.getText().equals(usernameRepeatField.getText())) {
                 validador= true;
-            }else{error.setText("Escribe bien la contraseña");}
+            }else{error.setText("Los nombres deben coincidir");}
         }else{error.setText("Rellena todos los campos");}
         //Comprueba que no haya otro usuario con el mismo nombre
         for(UsuarioDTO usuario: usuarioController.queryAllUsuarios()){
@@ -45,7 +44,7 @@ public class NewUserController {
         }
         if(validador){
             error.setText("");
-            UsuarioDTO usuario = new UsuarioDTO(usernameField.getText(), passwordField.getText(), "Hierro", null);
+            UsuarioDTO usuario = new UsuarioDTO(usernameField.getText(), "", "Hierro", null);
             usuarioController.insertUsuario(usuario);
             PreguntadosApplication.showMenuView();
         }
@@ -53,7 +52,7 @@ public class NewUserController {
     @FXML
     public void atras(ActionEvent actionEvent) {
         try {
-            PreguntadosApplication.showLoginView();
+            PreguntadosApplication.showListaUsarioView();
         } catch (Exception e) {
             e.printStackTrace();
         }

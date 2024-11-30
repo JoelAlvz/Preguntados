@@ -7,13 +7,18 @@ import com.app.preguntados.model.dto.PreguntaDTO;
 import com.app.preguntados.model.dto.RespuestaDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 @Component
-public class NuevasPreguntasController {
+public class NuevasPreguntasController implements Initializable {
 
     @Autowired
     private PreguntaController preguntaController;
@@ -26,7 +31,7 @@ public class NuevasPreguntasController {
     @FXML
     private CheckBox r1,r2,r3,r4;
 
-    public void añadirPregunta(ActionEvent actionEvent) {
+    public void añadirPregunta(ActionEvent actionEvent){
         try {
             // Validar las entradas (longitudes)
             if (preguntaLabel.getText().length() <= 60 &&
@@ -38,23 +43,26 @@ public class NuevasPreguntasController {
 
                 PreguntaDTO preguntaDTO = new PreguntaDTO(preguntaLabel.getText(),"creada","creada");
 
+                if(r1.isSelected() || r2.isSelected() || r3.isSelected() || r4.isSelected()) {
+                    // Llamar al controlador para insertar la pregunta y obtener su ID
+                    int preguntaId = preguntaController.insertarPregunta(preguntaDTO);
 
-                // Llamar al controlador para insertar la pregunta y obtener su ID
-                int preguntaId = preguntaController.insertarPregunta(preguntaDTO);
+                    // Insertar cada respuesta individualmente
+                    RespuestaDTO respuestaDTO1 = new RespuestaDTO(respuesta1.getText(), (Boolean) r1.isSelected(), preguntaId);
+                    respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO1);
 
-                // Insertar cada respuesta individualmente
-                RespuestaDTO respuestaDTO1 = new RespuestaDTO(respuesta1.getText(), (Boolean) r1.isSelected(), preguntaId);
-                respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO1);
+                    RespuestaDTO respuestaDTO2 = new RespuestaDTO(respuesta2.getText(), (Boolean) r2.isSelected(), preguntaId);
+                    respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO2);
 
-                RespuestaDTO respuestaDTO2 = new RespuestaDTO(respuesta2.getText(),(Boolean) r2.isSelected() , preguntaId);
-                respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO2);
+                    RespuestaDTO respuestaDTO3 = new RespuestaDTO(respuesta3.getText(), (Boolean) r3.isSelected(), preguntaId);
+                    respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO3);
 
-                RespuestaDTO respuestaDTO3 = new RespuestaDTO(respuesta3.getText(),(Boolean) r3.isSelected() , preguntaId);
-                respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO3);
-
-                RespuestaDTO respuestaDTO4 = new RespuestaDTO(respuesta4.getText(),(Boolean) r4.isSelected() , preguntaId);
-                respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO4);
-
+                    RespuestaDTO respuestaDTO4 = new RespuestaDTO(respuesta4.getText(), (Boolean) r4.isSelected(), preguntaId);
+                    respuestaController.insertarRespuestaParaPregunta(preguntaId, respuestaDTO4);
+                    actualizarCampos();
+                }else {
+                    System.out.println("Debe marcar una repsuesta correcta.");
+                }
 
             } else {
 
@@ -66,8 +74,70 @@ public class NuevasPreguntasController {
         }
     }
 
+    public void actualizarCampos(){
+        preguntaLabel.setText("");
+        respuesta1.setText("");
+        respuesta2.setText("");
+        respuesta3.setText("");
+        respuesta4.setText("");
+
+    }
+
     public void cancelar(ActionEvent actionEvent) throws Exception {
         PreguntadosApplication.showMenuView();
     }
 
+    public void check1(MouseEvent actionEvent) {
+        if (r1.isSelected()){
+            r2.setDisable(true);
+            r3.setDisable(true);
+            r4.setDisable(true);
+        } else {
+            r2.setDisable(false);
+            r3.setDisable(false);
+            r4.setDisable(false);
+        }
+    }
+    public void check2(MouseEvent actionEvent) {
+        if (r2.isSelected()){
+            r1.setDisable(true);
+            r3.setDisable(true);
+            r4.setDisable(true);
+        } else {
+            r1.setDisable(false);
+            r3.setDisable(false);
+            r4.setDisable(false);
+        }
+    }
+    public void check3(MouseEvent actionEvent) {
+        if (r3.isSelected()){
+            r1.setDisable(true);
+            r2.setDisable(true);
+            r4.setDisable(true);
+        } else {
+            r1.setDisable(false);
+            r2.setDisable(false);
+            r4.setDisable(false);
+        }
+
+    }
+    public void check4(MouseEvent actionEvent) {
+        if (r4.isSelected()){
+            r1.setDisable(true);
+            r2.setDisable(true);
+            r3.setDisable(true);
+        } else {
+            r1.setDisable(false);
+            r2.setDisable(false);
+            r3.setDisable(false);
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        r1.setFocusTraversable(false);
+        r2.setFocusTraversable(false);
+        r3.setFocusTraversable(false);
+        r4.setFocusTraversable(false);
+    }
 }

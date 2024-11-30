@@ -48,7 +48,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="21.0" prefWidth="661.0">
          <children>
-            <Label prefHeight="20.0" prefWidth="100.0" text="PUNTUACIÓN: ">
+            <Label fx:id="textoPuntuacion" text="PUNTUACIÓN: ">
                <font>
                   <Font size="14.0" />
                </font>
@@ -57,12 +57,15 @@
                <font>
                   <Font size="14.0" />
                </font>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </Label>
          </children>
       </HBox>
       <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="661.0">
          <children>
-            <Label prefHeight="20.0" prefWidth="159.0" text="PUNTUACION GLOBAL:">
+            <Label prefHeight="20.0" prefWidth="159.0" text="PUNTUACIÓN GLOBAL:">
                <font>
                   <Font size="14.0" />
                </font>

@@ -33,7 +33,7 @@
       </VBox>
       <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="600.0">
          <children>
-            <CheckBox fx:id="r1" mnemonicParsing="false" />
+            <CheckBox fx:id="r1" mnemonicParsing="false" onMouseClicked="#check1" />
             <Label text="1ª Respuesta">
                <font>
                   <Font size="18.0" />
@@ -42,7 +42,7 @@
                   <Insets right="70.0" />
                </HBox.margin>
             </Label>
-            <CheckBox fx:id="r2" mnemonicParsing="false">
+            <CheckBox fx:id="r2" mnemonicParsing="false" onMouseClicked="#check2">
                <HBox.margin>
                   <Insets left="60.0" />
                </HBox.margin>
@@ -79,7 +79,7 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="600.0">
          <children>
-            <CheckBox fx:id="r3" mnemonicParsing="false" />
+            <CheckBox fx:id="r3" mnemonicParsing="false" onMouseClicked="#check3" />
             <Label text="3ª Respuesta">
                <font>
                   <Font size="18.0" />
@@ -88,7 +88,7 @@
                   <Insets right="70.0" />
                </HBox.margin>
             </Label>
-            <CheckBox fx:id="r4" mnemonicParsing="false">
+            <CheckBox fx:id="r4" mnemonicParsing="false" onMouseClicked="#check4">
                <HBox.margin>
                   <Insets left="60.0" />
                </HBox.margin>

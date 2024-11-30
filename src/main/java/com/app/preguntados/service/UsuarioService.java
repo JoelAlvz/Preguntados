@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service("UsuarioService")
 @Lazy
 public class UsuarioService implements IUsuarioService {
@@ -47,4 +49,19 @@ public class UsuarioService implements IUsuarioService {
         usuarioDao.delete(usuario);
         return id;
     }
+
+    @Transactional
+    @Override
+    public int deleteUsuarioByNombre(UsuarioDTO usuarioDTO) {
+        String nombre = usuarioDTO.getNombre();
+        Optional<Usuario> usuarioOptional = usuarioDao.findByNombre(nombre);
+
+        if (usuarioOptional.isPresent()) {
+            usuarioDao.delete(usuarioOptional.get());
+            return usuarioOptional.get().getId();
+        } else {
+            throw new RuntimeException("Usuario con nombre '" + nombre + "' no encontrado.");
+        }
+    }
+
 }

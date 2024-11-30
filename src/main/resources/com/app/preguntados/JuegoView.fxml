@@ -10,6 +10,40 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="917.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.JuegoController">
    <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Usuario">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="usuarioLabel" text="user">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="30.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Puntuación actual">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="puntuacionActualLabel" text="0">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="30.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label text="Puntuación total">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <Label fx:id="puntuacionTotalLabel" text="0">
+               <HBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="72.0" prefWidth="580.0">
          <children>
             <ImageView fx:id="corazon1" fitHeight="56.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
@@ -41,7 +75,7 @@
       <Button fx:id="empezar" mnemonicParsing="false" onAction="#empezar" text="Empezar" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label fx:id="contador" text="Aciertos">
+            <Label fx:id="contador" text="Pregunta">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
