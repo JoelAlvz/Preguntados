@@ -9,9 +9,9 @@
 
 <VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.ListaUsuarioController">
    <children>
-      <Label fx:id="disponible" text="Usuarios Disponibles:">
+      <Label fx:id="disponible" text="Usuarios Disponibles:" textFill="WHITE">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <ListView fx:id="lista" prefHeight="200.0" prefWidth="716.0">
@@ -21,16 +21,25 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></ListView>
-      <Button mnemonicParsing="false" onAction="#escogerUsuario" prefHeight="43.0" prefWidth="108.0" text="Entrar">
+      <Button fx:id="entrar" mnemonicParsing="false" onAction="#escogerUsuario" onMouseEntered="#infoEntrar" onMouseExited="#volverEntidad" prefHeight="43.0" prefWidth="126.0" text="ENTRAR" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </Button>
-      <Button mnemonicParsing="false" onAction="#nuevoUsuario" prefHeight="43.0" prefWidth="108.0" text="Nuevo Usuario">
+      <Button fx:id="nuevo" mnemonicParsing="false" onAction="#nuevoUsuario" onMouseEntered="#infoNuevo" onMouseExited="#volverEntidad" prefHeight="43.0" prefWidth="126.0" text="NUEVO USUARIO" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
       </Button>
-      <Button mnemonicParsing="false" onAction="#eliminarUsuario" prefHeight="43.0" prefWidth="108.0" text="Eliminar" />
+      <Button fx:id="eliminar" mnemonicParsing="false" onAction="#eliminarUsuario" onMouseEntered="#infoEliminar" onMouseExited="#volverEntidad" prefHeight="43.0" prefWidth="126.0" text="ELIMINAR" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
    </children>
 </VBox>

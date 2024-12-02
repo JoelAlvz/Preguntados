@@ -7,28 +7,35 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox fx:id="vBox" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.NewUserController">
     <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox alignment="CENTER" prefHeight="399.0" prefWidth="1140.0">
          <children>
-              <Label text="Nombre de usuario:">
+              <Label text="Nombre de usuario:" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
             </Label>
               <TextField fx:id="usernameField">
                <VBox.margin>
-                  <Insets left="40.0" right="40.0" />
+                  <Insets left="300.0" right="300.0" />
                </VBox.margin></TextField>
-              <Label text="Repite el usuario:">
+              <Label text="Repite el usuario:" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
             </Label>
-              <PasswordField fx:id="usernameRepeatField">
+              <PasswordField fx:id="usernameRepeatField" prefHeight="25.0" prefWidth="958.0">
                <VBox.margin>
-                  <Insets left="40.0" right="40.0" />
+                  <Insets left="300.0" right="300.0" />
                </VBox.margin></PasswordField>
             <Label fx:id="error" text="" textFill="RED">
                <VBox.margin>
@@ -45,15 +52,21 @@
       </VBox>
       <HBox alignment="CENTER" prefHeight="89.0" prefWidth="600.0">
          <children>
-              <Button onAction="#crearCuenta" text="Crear cuenta ">
+              <Button fx:id="crear" onAction="#crearCuenta" onMouseEntered="#infoCrear" onMouseExited="#volverEntidad" prefHeight="59.0" prefWidth="140.0" text="CREAR CUENTA" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
             </Button>
-              <Button mnemonicParsing="false" onAction="#atras" text="Volver">
+              <Button fx:id="volver" mnemonicParsing="false" onAction="#atras" onMouseEntered="#infoVolver" onMouseExited="#volverEntidad" prefHeight="59.0" prefWidth="140.0" text="VOLVER" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
             </Button>
          </children>
       </HBox>

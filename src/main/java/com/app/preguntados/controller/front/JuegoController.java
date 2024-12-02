@@ -12,10 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 
@@ -29,13 +29,13 @@ import java.util.ResourceBundle;
 @Component
 public class JuegoController implements Initializable {
     @FXML
-    private Label preguntaLabel, contador;
+    private Label preguntaLabel;
     @FXML
     private Button res1, res2, res3, res4, empezar, comodin;
     @FXML
     private ImageView corazon1,corazon2, corazon3;
     @FXML
-    private Label usuarioLabel,puntuacionActualLabel,puntuacionTotalLabel;
+    private Label usuarioLabel,puntuacionActualLabel,puntuacionTotalLabel, contador;
     @FXML
     private VBox vBox;
 
@@ -59,6 +59,9 @@ public class JuegoController implements Initializable {
     private static Image coranzonConVida;
     private static Image imagenFondo1, imagenFondo2, imagenFondo3;
     private List<Integer> listaId = new ArrayList<>();
+    BackgroundImage backgroundImage;
+    BackgroundImage backgroundImageHover;
+    private static Image boton,botonHover;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -68,6 +71,7 @@ public class JuegoController implements Initializable {
         res2.setDisable(true);
         res3.setDisable(true);
         res4.setDisable(true);
+        preguntaLabel.isWrapText();
         usuarioLabel.setText(usuario.getUsuario().getNombre());
         sumaPuntos=0;
         for (PuntuacionDTO puntos : puntuacionController.getPuntuacionesByUsuario(usuario.getUsuario().getId())){
@@ -78,6 +82,14 @@ public class JuegoController implements Initializable {
         vBox.setStyle(        "-fx-background-image: url('" + imagenFondo1.getUrl() + "'); " +
                 "-fx-background-size: cover; " +
                 "-fx-background-repeat: no-repeat;");
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+        backgroundImage = new BackgroundImage(boton, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        backgroundImageHover = new BackgroundImage(botonHover, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        res1.setBackground(new Background(backgroundImage));
+        res2.setBackground(new Background(backgroundImage));
+        res3.setBackground(new Background(backgroundImage));
+        res4.setBackground(new Background(backgroundImage));
+        empezar.setBackground(new Background(backgroundImage));
 
     }
 
@@ -88,6 +100,9 @@ public class JuegoController implements Initializable {
         imagenFondo1 = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego1.png").toExternalForm());
         imagenFondo2 = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego2.png").toExternalForm());
         imagenFondo3 = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego3.png").toExternalForm());
+        boton = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/boton.png").toExternalForm());
+        botonHover = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/botonHover.png").toExternalForm());
+
         System.out.println(imagenFondo1.getUrl());
         System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
 
@@ -207,7 +222,7 @@ public class JuegoController implements Initializable {
             empezar.setVisible(false);
             contador.setVisible(true);
             comodin.setVisible(true);
-            preguntaLabel.setWrapText(true);
+
             corazon1.setImage(coranzonConVida);
             corazon2.setImage(coranzonConVida);
             corazon3.setImage(coranzonConVida);
@@ -283,4 +298,37 @@ public class JuegoController implements Initializable {
             nuevaPregunta();
         }
     }
+
+    public void infoEmpezar(MouseEvent mouseEvent) {
+        empezar.setBackground(new Background(backgroundImageHover));
+
+    }
+    public void infoResp1(MouseEvent mouseEvent) {
+        res1.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoResp2(MouseEvent mouseEvent) {
+        res2.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoResp3(MouseEvent mouseEvent) {
+        res3.setBackground(new Background(backgroundImageHover));
+    }
+
+    public void infoResp4(MouseEvent mouseEvent) {
+        res4.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void volverEstado(MouseEvent mouseEvent) {
+        empezar.setBackground(new Background(backgroundImage));
+        res1.setBackground(new Background(backgroundImage));
+        res2.setBackground(new Background(backgroundImage));
+        res3.setBackground(new Background(backgroundImage));
+        res4.setBackground(new Background(backgroundImage));
+
+    }
+
 }

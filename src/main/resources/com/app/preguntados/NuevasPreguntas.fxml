@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.NuevasPreguntasController">
+<VBox fx:id="vBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.NuevasPreguntasController">
    <children>
-      <VBox alignment="CENTER" prefHeight="144.0" prefWidth="600.0">
+      <VBox alignment="CENTER" prefHeight="180.0" prefWidth="1200.0">
          <children>
-            <Label text="Escribe una nueva pregunta">
+            <Label style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-background-radius: 10;" text="Escribe una nueva pregunta" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -29,10 +33,13 @@
       </VBox>
       <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="600.0">
          <children>
-            <CheckBox fx:id="r1" mnemonicParsing="false" onMouseClicked="#check1" />
-            <Label text="1ª Respuesta">
+            <CheckBox fx:id="r1" mnemonicParsing="false" onMouseClicked="#check1">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></CheckBox>
+            <Label style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-background-radius: 10;" text="1ª Respuesta" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <HBox.margin>
                   <Insets right="70.0" />
@@ -40,12 +47,12 @@
             </Label>
             <CheckBox fx:id="r2" mnemonicParsing="false" onMouseClicked="#check2">
                <HBox.margin>
-                  <Insets left="60.0" />
+                  <Insets left="60.0" right="10.0" />
                </HBox.margin>
             </CheckBox>
-            <Label text="2ª Respuesta">
+            <Label style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-background-radius: 10;" text="2ª Respuesta" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <HBox.margin>
                   <Insets />
@@ -75,10 +82,13 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="41.0" prefWidth="600.0">
          <children>
-            <CheckBox fx:id="r3" mnemonicParsing="false" onMouseClicked="#check3" />
-            <Label text="3ª Respuesta">
+            <CheckBox fx:id="r3" mnemonicParsing="false" onMouseClicked="#check3">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin></CheckBox>
+            <Label style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-background-radius: 10;" text="3ª Respuesta" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <HBox.margin>
                   <Insets right="70.0" />
@@ -86,12 +96,12 @@
             </Label>
             <CheckBox fx:id="r4" mnemonicParsing="false" onMouseClicked="#check4">
                <HBox.margin>
-                  <Insets left="60.0" />
+                  <Insets left="60.0" right="10.0" />
                </HBox.margin>
             </CheckBox>
-            <Label text="4ª Respuesta">
+            <Label style="-fx-background-color: rgba(173, 216, 230, 0.8); -fx-background-radius: 10;" text="4ª Respuesta" textFill="WHITE">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
                <HBox.margin>
                   <Insets />
@@ -121,15 +131,21 @@
       </HBox>
       <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#añadirPregunta" prefHeight="45.0" prefWidth="75.0" text="Añadir">
+            <Button fx:id="anadir" mnemonicParsing="false" onAction="#añadirPregunta" onMouseEntered="#infoAnadir" onMouseExited="#volverEntidad" prefHeight="45.0" prefWidth="112.0" text="AÑADIR" textFill="WHITE">
                <HBox.margin>
                   <Insets right="70.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#cancelar" prefHeight="45.0" prefWidth="75.0" text="Cancelar">
+            <Button fx:id="volver" mnemonicParsing="false" onAction="#cancelar" onMouseEntered="#infoVolver" onMouseExited="#volverEntidad" prefHeight="45.0" prefWidth="112.0" text="CANCELAR" textFill="WHITE">
                <HBox.margin>
                   <Insets left="70.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
             </Button>
          </children>
       </HBox>

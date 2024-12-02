@@ -8,9 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +32,11 @@ public class BorrarPreguntaController implements Initializable {
 
     private static Image imagenFondo;
     private ObservableList<String> preguntas;
-
+    BackgroundImage backgroundImage;
+    BackgroundImage backgroundImageHover;
+    private static Image boton,botonHover;
+    @FXML
+    private Button eliminar,volver;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         preguntas = FXCollections.observableArrayList();
@@ -39,10 +45,18 @@ public class BorrarPreguntaController implements Initializable {
         vBox.setStyle(        "-fx-background-image: url('" + imagenFondo.getUrl() + "'); " +
                 "-fx-background-size: cover; " +
                 "-fx-background-repeat: no-repeat;");
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+        backgroundImage = new BackgroundImage(boton, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        backgroundImageHover = new BackgroundImage(botonHover, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        eliminar.setBackground(new Background(backgroundImage));
+        volver.setBackground(new Background(backgroundImage));
+
     }
     public static void initGraphics() {
         imagenFondo = new Image(BorrarPreguntaController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoPreguntas.png").toExternalForm());
         System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
+        boton = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/boton.png").toExternalForm());
+        botonHover = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/botonHover.png").toExternalForm());
 
     }
     public void eliminarPregunta(ActionEvent actionEvent) {
@@ -82,4 +96,19 @@ public class BorrarPreguntaController implements Initializable {
     }
 
 
+    public void infoEliminar(MouseEvent mouseEvent) {
+        eliminar.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoVolver(MouseEvent mouseEvent) {
+        volver.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void volverEntidad(MouseEvent mouseEvent) {
+        eliminar.setBackground(new Background(backgroundImage));
+        volver.setBackground(new Background(backgroundImage));
+
+    }
 }

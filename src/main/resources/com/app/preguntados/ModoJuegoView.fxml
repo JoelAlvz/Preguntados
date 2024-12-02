@@ -1,43 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox fx:id="vBox" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.ModoJuegoController">
+<VBox fx:id="vBox" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.ModoJuegoController">
          <children>
       <HBox alignment="CENTER" prefHeight="66.0" prefWidth="393.0">
          <children>
-                  <Label text="ELIGE UN NIVEL DE DIFICULTAD" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
+            <Text fill="WHITE" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="1.5" text="ELIGE UN NIVEL DE DIFICULTAD">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
          </children>
       </HBox>
-            <Button fx:id="facil" mnemonicParsing="false" onAction="#lvfacil" prefHeight="56.0" prefWidth="254.0" text="FÁCIL">
+            <Button fx:id="facil" mnemonicParsing="false" onAction="#lvfacil" onMouseEntered="#infoFacil" onMouseExited="#volverEstado" prefHeight="56.0" prefWidth="254.0" text="FÁCIL" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin></Button>
-            <Button fx:id="medio" mnemonicParsing="false" onAction="#lvmedio" prefHeight="56.0" prefWidth="254.0" text="MEDIO">
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+            <Button fx:id="medio" mnemonicParsing="false" onAction="#lvmedio" onMouseEntered="#infoMedio" onMouseExited="#volverEstado" prefHeight="56.0" prefWidth="254.0" text="MEDIO" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin></Button>
-            <Button fx:id="avanzado" mnemonicParsing="false" onAction="#lvavanzado" prefHeight="56.0" prefWidth="254.0" text="AVANZADO">
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+            <Button fx:id="avanzado" mnemonicParsing="false" onAction="#lvavanzado" onMouseEntered="#infoAvanzado" onMouseExited="#volverEstado" prefHeight="56.0" prefWidth="254.0" text="AVANZADO" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin></Button>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#lvmaestro" prefHeight="56.0" prefWidth="254.0" text="MAESTRO">
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+            <Button fx:id="maestro" alignment="CENTER" mnemonicParsing="false" onAction="#lvmaestro" onMouseEntered="#infoMaestro" onMouseExited="#volverEstado" prefHeight="56.0" prefWidth="254.0" text="ALEATORIO" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </VBox.margin></Button>
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
       <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="500.0">
          <children>
-            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#volver" prefHeight="40.0" prefWidth="86.0" text="Button">
+            <Button fx:id="botonVolver" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#volver" onMouseEntered="#infoHover" onMouseExited="#volverEstado" prefHeight="55.0" prefWidth="98.0" text="VOLVER" textAlignment="CENTER" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
             </Button>
          </children>
       </HBox>

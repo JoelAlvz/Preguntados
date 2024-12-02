@@ -8,11 +8,12 @@ import com.app.preguntados.model.dto.RespuestaDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +35,13 @@ public class NuevasPreguntasController implements Initializable {
     private CheckBox r1,r2,r3,r4;
     @FXML
     private VBox vBox;
-
     private static Image imagenFondo;
+    BackgroundImage backgroundImage;
+    BackgroundImage backgroundImageHover;
+    private static Image boton,botonHover;
+    @FXML
+    private Button anadir, volver;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         r1.setFocusTraversable(false);
@@ -45,9 +51,17 @@ public class NuevasPreguntasController implements Initializable {
         vBox.setStyle(        "-fx-background-image: url('" + imagenFondo.getUrl() + "'); " +
                 "-fx-background-size: cover; " +
                 "-fx-background-repeat: no-repeat;");
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+        backgroundImage = new BackgroundImage(boton, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        backgroundImageHover = new BackgroundImage(botonHover, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        anadir.setBackground(new Background(backgroundImage));
+        volver.setBackground(new Background(backgroundImage));
+
     }
     public static void initGraphics() {
         imagenFondo = new Image(NuevasPreguntasController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoPreguntas.png").toExternalForm());
+        boton = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/boton.png").toExternalForm());
+        botonHover = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/botonHover.png").toExternalForm());
         System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
 
     }
@@ -159,4 +173,19 @@ public class NuevasPreguntasController implements Initializable {
     }
 
 
+    public void infoAnadir(MouseEvent mouseEvent) {
+        anadir.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoVolver(MouseEvent mouseEvent) {
+        volver.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void volverEntidad(MouseEvent mouseEvent) {
+        anadir.setBackground(new Background(backgroundImage));
+        volver.setBackground(new Background(backgroundImage));
+
+    }
 }

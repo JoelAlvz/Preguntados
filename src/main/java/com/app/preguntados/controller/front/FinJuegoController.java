@@ -9,9 +9,11 @@ import com.app.preguntados.model.dto.PuntuacionDTO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,8 @@ public class FinJuegoController implements Initializable {
     private Label dificultadLabel;
     @FXML
     private Label puntuacionTotal,textoPuntuacion;
-
+    @FXML
+    private Button reiniciar, volver;
 
     @Autowired
     private UsuarioActual usuarioActual;
@@ -39,6 +42,10 @@ public class FinJuegoController implements Initializable {
     private ModoJuegoController modoJuegoController;
 
     private int sumaPuntos;
+    BackgroundImage backgroundImage;
+    BackgroundImage backgroundImageHover;
+    private static Image boton,botonHover;
+
 
     private static Image imagenFondo1, imagenFondo2;
     @FXML
@@ -48,6 +55,12 @@ public class FinJuegoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         calcularPuntuacion();
         puntuacionTotal.setText(String.valueOf(sumaPuntos));
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+        backgroundImage = new BackgroundImage(boton, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        backgroundImageHover = new BackgroundImage(botonHover, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        reiniciar.setBackground(new Background(backgroundImage));
+        volver.setBackground(new Background(backgroundImage));
+
 
     }
     public static void initGraphics() {
@@ -55,6 +68,8 @@ public class FinJuegoController implements Initializable {
         imagenFondo2 = new Image(FinJuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/finJuego2.png").toExternalForm());
         System.out.println(imagenFondo1.getUrl());
         System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
+        boton = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/boton.png").toExternalForm());
+        botonHover = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/botonHover.png").toExternalForm());
 
     }
     public int calcularAciertos(int puntos){
@@ -82,6 +97,7 @@ public class FinJuegoController implements Initializable {
                 "-fx-background-size: cover; " +
                 "-fx-background-repeat: no-repeat;");
         }
+
     }
 
     //Establece la suma de todas las puntuaciones y la puntuacion y aciertos de esta partida
@@ -138,4 +154,19 @@ public class FinJuegoController implements Initializable {
     }
 
 
+    public void infoReiniciar(MouseEvent mouseEvent) {
+        reiniciar.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoVolver(MouseEvent mouseEvent) {
+        volver.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void volverEntidad(MouseEvent mouseEvent) {
+        reiniciar.setBackground(new Background(backgroundImage));
+        volver.setBackground(new Background(backgroundImage));
+
+    }
 }

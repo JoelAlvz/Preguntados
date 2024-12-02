@@ -9,85 +9,103 @@
 
 <VBox fx:id="vBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.MContadorController">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Label text="Usuario">
+            <Label text="Usuario:" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="usuarioLabel" text="user">
+            <Label fx:id="usuarioLabel" text="user" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="10.0" right="30.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <Label text="Puntuación actual">
+            <Label text="Puntuación actual:" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="puntuacionActualLabel" text="0">
+            <Label fx:id="puntuacionActualLabel" text="0" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="10.0" right="30.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <Label text="Puntuación máxima">
+            <Label text="Puntuación máxima:" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="puntuacionTotalLabel" text="0">
+            <Label fx:id="puntuacionTotalLabel" text="0" textFill="WHITE">
                <HBox.margin>
                   <Insets bottom="20.0" left="10.0" right="20.0" top="20.0" />
                </HBox.margin>
             </Label>
          </children>
       </HBox>
-      <Label fx:id="contador">
+      <Label fx:id="contador" style="-fx-background-color: black; -fx-background-radius: 15;" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>
          <VBox.margin>
-            <Insets top="20.0" />
+            <Insets top="50.0" />
          </VBox.margin>
       </Label>
-      <HBox alignment="TOP_CENTER" prefHeight="169.0">
+      <HBox alignment="TOP_CENTER" prefHeight="141.0" prefWidth="1200.0">
          <children>
-            <Label fx:id="preguntaLabel" contentDisplay="TOP" textAlignment="CENTER">
+            <Label fx:id="preguntaLabel" contentDisplay="TOP" style="-fx-background-color: rgba(173, 216, 230, 0.5); -fx-background-radius: 10;" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font size="26.0" />
+                  <Font size="24.0" />
                </font>
+               <HBox.margin>
+                  <Insets top="70.0" />
+               </HBox.margin>
             </Label>
          </children>
       </HBox>
-      <Button fx:id="empezar" mnemonicParsing="false" onAction="#empezar" text="Empezar" />
+      <Button fx:id="empezar" mnemonicParsing="false" onAction="#empezar" onMouseEntered="#infoEmpezar" onMouseExited="#volverEntidad" text="Empezar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <HBox alignment="CENTER" prefHeight="136.0" prefWidth="849.0">
                <children>
-                  <Button fx:id="res1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta1" prefHeight="70.0" prefWidth="200.0" text="Respuesta 1">
+                  <Button fx:id="res1" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta1" onMouseEntered="#infoResp1" onMouseExited="#volverEntidad" prefHeight="70.0" prefWidth="200.0" text="Respuesta 1" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="30.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="res2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta2" prefHeight="70.0" prefWidth="200.0" text="Respuesta 2">
+                  <Button fx:id="res2" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta2" onMouseEntered="#infoResp2" onMouseExited="#volverEntidad" prefHeight="70.0" prefWidth="200.0" text="Respuesta 2" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" top="30.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="157.0" prefWidth="617.0">
                <children>
-                  <Button fx:id="res3" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta3" prefHeight="70.0" prefWidth="200.0" text="Respuesta 3">
+                  <Button fx:id="res3" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta3" onMouseEntered="#infoResp3" onMouseExited="#volverEntidad" prefHeight="70.0" prefWidth="200.0" text="Respuesta 3" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="res4" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta4" prefHeight="70.0" prefWidth="200.0" text="Respuesta 4">
+                  <Button fx:id="res4" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#respuesta4" onMouseEntered="#infoResp4" onMouseExited="#volverEntidad" prefHeight="70.0" prefWidth="200.0" text="Respuesta 4" textAlignment="CENTER" textFill="WHITE">
                      <HBox.margin>
                         <Insets bottom="50.0" left="50.0" right="50.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </Button>
                </children>
             </HBox>

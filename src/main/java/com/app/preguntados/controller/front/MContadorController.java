@@ -13,7 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -53,6 +54,9 @@ public class MContadorController implements Initializable {
     private int maximaPuntuacion;
     private int contadorAciertos;
     private int contadorResp;
+    BackgroundImage backgroundImage;
+    BackgroundImage backgroundImageHover;
+    private static Image boton,botonHover;
 
 
     @Override
@@ -66,14 +70,24 @@ public class MContadorController implements Initializable {
         vBox.setStyle(        "-fx-background-image: url('" + imagenFondo1.getUrl() + "'); " +
                 "-fx-background-size: cover; " +
                 "-fx-background-repeat: no-repeat;");
+        BackgroundSize size = new BackgroundSize(100, 100, true, true, true, false);
+        backgroundImage = new BackgroundImage(boton, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        backgroundImageHover = new BackgroundImage(botonHover, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, size);
+        res1.setBackground(new Background(backgroundImage));
+        res2.setBackground(new Background(backgroundImage));
+        res3.setBackground(new Background(backgroundImage));
+        res4.setBackground(new Background(backgroundImage));
+        empezar.setBackground(new Background(backgroundImage));
+
     }
     public static void initGraphics() {
         imagenFondo1 = new Image(MContadorController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego1.png").toExternalForm());
         imagenFondo2 = new Image(MContadorController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego2.png").toExternalForm());
         imagenFondo3 = new Image(MContadorController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego3.png").toExternalForm());
+        boton = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/boton.png").toExternalForm());
+        botonHover = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/botonHover.png").toExternalForm());
         System.out.println(imagenFondo1.getUrl());
         System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
-
     }
     public void respuestaCorrecta(){
         vBox.setStyle(        "-fx-background-image: url('" + imagenFondo2.getUrl() + "'); " +
@@ -117,13 +131,17 @@ public class MContadorController implements Initializable {
     }
 
     private void actualizar() {
-        if (tiempoRestante > 0) {
+        if (tiempoRestante >= 0) {
             contador.setText(String.valueOf(tiempoRestante));
             tiempoRestante--;
             System.out.println(contador.getText());
         }
+        if (tiempoRestante <= 30){
+            contador.setStyle("-fx-text-fill: yellow;-fx-background-color: black;-fx-background-radius: 15;");
+
+        }
         if (tiempoRestante <= 10) {
-            contador.setStyle("-fx-text-fill: red;");
+            contador.setStyle("-fx-text-fill: red;-fx-background-color: black;-fx-background-radius: 15;");
         }
     }
 
@@ -215,4 +233,36 @@ public class MContadorController implements Initializable {
         nuevaPregunta();
     }
 
+    public void infoEmpezar(MouseEvent mouseEvent) {
+        empezar.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoResp1(MouseEvent mouseEvent) {
+        res1.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoResp2(MouseEvent mouseEvent) {
+        res2.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoResp3(MouseEvent mouseEvent) {
+        res3.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void infoResp4(MouseEvent mouseEvent) {
+        res4.setBackground(new Background(backgroundImageHover));
+
+    }
+
+    public void volverEntidad(MouseEvent mouseEvent) {
+        empezar.setBackground(new Background(backgroundImage));
+        res1.setBackground(new Background(backgroundImage));
+        res2.setBackground(new Background(backgroundImage));
+        res3.setBackground(new Background(backgroundImage));
+        res4.setBackground(new Background(backgroundImage));
+    }
 }
