@@ -79,7 +79,7 @@ public class NewUserController implements Initializable {
             error.setText("");
             UsuarioDTO usuario = new UsuarioDTO(usernameField.getText(), "", "Hierro", null);
             usuarioController.insertUsuario(usuario);
-            PreguntadosApplication.showMenuView();
+            PreguntadosApplication.showListaUsarioView();
         }
     }
     @FXML

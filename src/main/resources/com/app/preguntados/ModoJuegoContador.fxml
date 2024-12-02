@@ -63,7 +63,7 @@
             </Label>
          </children>
       </HBox>
-      <Button fx:id="empezar" mnemonicParsing="false" onAction="#empezar" onMouseEntered="#infoEmpezar" onMouseExited="#volverEntidad" text="Empezar" textFill="WHITE">
+      <Button fx:id="empezar" mnemonicParsing="false" onAction="#empezar" onMouseEntered="#infoEmpezar" onMouseExited="#volverEntidad" prefHeight="39.0" prefWidth="86.0" text="Empezar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
