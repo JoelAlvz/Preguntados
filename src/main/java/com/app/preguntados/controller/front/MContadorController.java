@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,12 +35,15 @@ public class MContadorController implements Initializable {
     private Button res1, res2, res3, res4, empezar;
     @FXML
     private Label usuarioLabel,puntuacionActualLabel,puntuacionTotalLabel;
+    @FXML
+    private VBox vBox;
     @Autowired
     private PreguntaController preguntas;
     @Autowired
     private UsuarioActual usuario;
     @Autowired
     private PuntuacionController puntuacionController;
+    private static Image imagenFondo1, imagenFondo2, imagenFondo3;
 
     PuntuacionDTO puntuacion;
     private PreguntaDTO preguntaDTO;
@@ -58,9 +63,28 @@ public class MContadorController implements Initializable {
         res4.setDisable(true);
         usuarioLabel.setText(usuario.getUsuario().getNombre());
         maximaPuntuacion();
+        vBox.setStyle(        "-fx-background-image: url('" + imagenFondo1.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+    }
+    public static void initGraphics() {
+        imagenFondo1 = new Image(MContadorController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego1.png").toExternalForm());
+        imagenFondo2 = new Image(MContadorController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego2.png").toExternalForm());
+        imagenFondo3 = new Image(MContadorController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego3.png").toExternalForm());
+        System.out.println(imagenFondo1.getUrl());
+        System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
 
     }
-
+    public void respuestaCorrecta(){
+        vBox.setStyle(        "-fx-background-image: url('" + imagenFondo2.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+    }
+    public void respuestaIncorrecta(){
+        vBox.setStyle(        "-fx-background-image: url('" + imagenFondo3.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+    }
     private void maximaPuntuacion(){
         maximaPuntuacion=0;
         for (PuntuacionDTO puntos : puntuacionController.getPuntuacionesByUsuario(usuario.getUsuario().getId())){
@@ -126,7 +150,7 @@ public class MContadorController implements Initializable {
 
     }
     public void empezar(ActionEvent actionEvent) {
-        inicio(120);
+        inicio(80);
         listaId.clear();
         nuevaPregunta();
         empezar.setVisible(false);
@@ -153,7 +177,8 @@ public class MContadorController implements Initializable {
     public void respuesta1(ActionEvent actionEvent) {
         if (preguntaDTO.getRespuestas().get(0).getVerdadera()) {
             contadorAciertos++;
-        }
+            respuestaCorrecta();
+        }else {respuestaIncorrecta();}
         contadorResp++;
         puntuacionActualLabel.setText(String.valueOf(contadorAciertos + "/" + contadorResp));
         nuevaPregunta();
@@ -162,7 +187,8 @@ public class MContadorController implements Initializable {
     public void respuesta2(ActionEvent actionEvent) {
         if (preguntaDTO.getRespuestas().get(1).getVerdadera()) {
         contadorAciertos++;
-    }
+            respuestaCorrecta();
+        }else {respuestaIncorrecta();}
         contadorResp++;
         puntuacionActualLabel.setText(String.valueOf(contadorAciertos + "/" + contadorResp));
         nuevaPregunta();
@@ -172,7 +198,8 @@ public class MContadorController implements Initializable {
     public void respuesta3(ActionEvent actionEvent) {
         if (preguntaDTO.getRespuestas().get(2).getVerdadera()) {
             contadorAciertos++;
-        }
+            respuestaCorrecta();
+        }else {respuestaIncorrecta();}
         contadorResp++;
         puntuacionActualLabel.setText(String.valueOf(contadorAciertos + "/" + contadorResp));
         nuevaPregunta();
@@ -181,7 +208,8 @@ public class MContadorController implements Initializable {
     public void respuesta4(ActionEvent actionEvent) {
         if (preguntaDTO.getRespuestas().get(3).getVerdadera()) {
             contadorAciertos++;
-        }
+            respuestaCorrecta();
+        }else {respuestaIncorrecta();}
         contadorResp++;
         puntuacionActualLabel.setText(String.valueOf(contadorAciertos + "/" + contadorResp));
         nuevaPregunta();

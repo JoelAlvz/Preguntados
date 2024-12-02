@@ -7,16 +7,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Component
-public class ListaUsuarioController {
+public class ListaUsuarioController implements Initializable {
     @Autowired
     private UsuarioController usuarioController;
 
@@ -25,17 +30,27 @@ public class ListaUsuarioController {
 
     @FXML
     private ListView<String> lista;
+    @FXML
+    private VBox vBox;
 
     private ObservableList<String> usuarios;
+    private static Image imagenFondo;
 
-
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         usuarios = FXCollections.observableArrayList();
         lista.setItems(usuarios);
         cargarUsuarios();
+        vBox.setStyle( "-fx-background-image: url('" + imagenFondo.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
     }
 
+    public static void initGraphics() {
+        imagenFondo = new Image(ListaUsuarioController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoListaUser.png").toExternalForm());
+        System.out.println(imagenFondo.getUrl());
+        System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
+    }
     private void cargarUsuarios() {
         try {
             List<UsuarioDTO> usuariosList = usuarioController.queryAllUsuarios();
@@ -80,4 +95,6 @@ public class ListaUsuarioController {
     public void nuevoUsuario(ActionEvent actionEvent) throws Exception {
         PreguntadosApplication.showRegisterView();
     }
+
+
 }

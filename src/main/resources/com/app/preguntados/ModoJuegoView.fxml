@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="415.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.ModoJuegoController">
+<VBox fx:id="vBox" alignment="CENTER" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.preguntados.controller.front.ModoJuegoController">
          <children>
       <HBox alignment="CENTER" prefHeight="66.0" prefWidth="393.0">
          <children>

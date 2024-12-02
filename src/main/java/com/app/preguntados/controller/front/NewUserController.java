@@ -3,18 +3,24 @@ package com.app.preguntados.controller.front;
 import com.app.preguntados.PreguntadosApplication;
 import com.app.preguntados.controller.UsuarioController;
 import com.app.preguntados.model.dto.UsuarioDTO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 @Component
-public class NewUserController {
+public class NewUserController implements Initializable {
 
     @Autowired
     private UsuarioController usuarioController;
@@ -24,8 +30,22 @@ public class NewUserController {
     private TextField usernameField;
     @FXML
     private TextField usernameRepeatField;
+    @FXML
+    private VBox vBox;
 
+    private static Image imagenFondo;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        vBox.setStyle( "-fx-background-image: url('" + imagenFondo.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+    }
+    public static void initGraphics() {
+        imagenFondo = new Image(NewUserController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoListaUser.png").toExternalForm());
+        System.out.println(imagenFondo.getUrl());
+        System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
+    }
     @FXML
     public void crearCuenta(ActionEvent actionEvent) throws Exception {
         boolean validador = false;
@@ -57,4 +77,6 @@ public class NewUserController {
             e.printStackTrace();
         }
     }
+
+
 }

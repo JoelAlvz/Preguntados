@@ -3,11 +3,14 @@ package com.app.preguntados.controller.front;
 import com.app.preguntados.PreguntadosApplication;
 import com.app.preguntados.controller.PuntuacionController;
 import com.app.preguntados.model.dto.PuntuacionDTO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +27,9 @@ public class ModoJuegoController implements Initializable {
     private Button facil, medio, avanzado;
 
     private int sumaPuntos;
+    @FXML
+    private VBox vBox;
+    private static Image imagenFondo;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,8 +41,16 @@ public class ModoJuegoController implements Initializable {
         }
         System.out.println(sumaPuntos);
         iniciarBotones();
+        vBox.setStyle( "-fx-background-image: url('" + imagenFondo.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
     }
 
+    public static void initGraphics() {
+        imagenFondo = new Image(ModoJuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoModoJuego.png").toExternalForm());
+        System.out.println(imagenFondo.getUrl());
+        System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
+    }
     public void iniciarBotones(){
         if (sumaPuntos>50){
             medio.setDisable(false);

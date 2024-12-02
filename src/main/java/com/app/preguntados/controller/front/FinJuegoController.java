@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,15 +40,23 @@ public class FinJuegoController implements Initializable {
 
     private int sumaPuntos;
 
+    private static Image imagenFondo1, imagenFondo2;
+    @FXML
+    private VBox vBox;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         calcularPuntuacion();
-
         puntuacionTotal.setText(String.valueOf(sumaPuntos));
 
     }
+    public static void initGraphics() {
+        imagenFondo1 = new Image(FinJuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/finJuego1.png").toExternalForm());
+        imagenFondo2 = new Image(FinJuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/finJuego2.png").toExternalForm());
+        System.out.println(imagenFondo1.getUrl());
+        System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
 
+    }
     public int calcularAciertos(int puntos){
         if (usuarioActual.getModoJuego()==1){
             dificultadLabel.setText("Facil");
@@ -62,6 +72,18 @@ public class FinJuegoController implements Initializable {
         return puntos;
     }
 
+    public void mostrarFondo(int puntos){
+        if (puntos ==0){
+            vBox.setStyle(        "-fx-background-image: url('" + imagenFondo1.getUrl() + "'); " +
+                    "-fx-background-size: cover; " +
+                    "-fx-background-repeat: no-repeat;");
+        }else {
+            vBox.setStyle(        "-fx-background-image: url('" + imagenFondo2.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+        }
+    }
+
     //Establece la suma de todas las puntuaciones y la puntuacion y aciertos de esta partida
     public void calcularPuntuacion(){
         int cont = 0;
@@ -73,6 +95,7 @@ public class FinJuegoController implements Initializable {
                 if ((puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size() - 1) == cont) {
                     aciertosLabel.setText(String.valueOf(calcularAciertos(puntos.getPuntuacion())));
                     puntuacionLabel.setText(String.valueOf(puntos.getPuntuacion()));
+                    mostrarFondo(puntos.getPuntuacion());
                 }
                 cont++;
             }
@@ -85,7 +108,7 @@ public class FinJuegoController implements Initializable {
                 }
                 if ((puntuacion.getPuntuacionesByUsuario(usuarioActual.getUsuario().getId()).size() - 1) == cont) {
                     aciertosLabel.setText(String.valueOf(calcularAciertos(puntos.getPuntuacioncompe())));
-
+                    mostrarFondo(puntos.getPuntuacioncompe());
                 }
                 cont++;
             }

@@ -1,6 +1,6 @@
 package com.app.preguntados;
 
-import com.app.preguntados.controller.front.JuegoController;
+import com.app.preguntados.controller.front.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -54,6 +54,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showFinJuegoView() throws Exception {
+		FinJuegoController.initGraphics();
 			FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("FinJuegoView.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -64,6 +65,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showBorrarPreguntaView() throws Exception {
+		BorrarPreguntaController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("BorrarPreguntaView.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -74,6 +76,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showMenuView() throws Exception {
+		MenuController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("MenuView.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -82,8 +85,10 @@ public class PreguntadosApplication extends Application {
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("Menú Principal");
 		primaryStage.show();
+
 	}
 	public static void showModoJuegoView() throws Exception {
+		ModoJuegoController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("ModoJuegoView.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -94,6 +99,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showNuevasPreguntasView() throws Exception {
+		NuevasPreguntasController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("NuevasPreguntas.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -105,6 +111,7 @@ public class PreguntadosApplication extends Application {
 
 	}
 	public static void showRegisterView() throws Exception {
+		NewUserController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("RegistroView.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -115,6 +122,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showContadorView() throws Exception {
+		MContadorController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("ModoJuegoContador.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -125,6 +133,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showListaUsarioView() throws Exception {
+		ListaUsuarioController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("ListaUsuario.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -135,6 +144,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.show();
 	}
 	public static void showJuegoView() throws Exception {
+		JuegoController.initGraphics();
 		FXMLLoader loader = new FXMLLoader(PreguntadosApplication.class.getResource("JuegoView.fxml"));
 		// Configurar controlador usando Spring
 		loader.setControllerFactory(springContext::getBean);
@@ -143,7 +153,7 @@ public class PreguntadosApplication extends Application {
 		primaryStage.setScene(new Scene(root));
 		primaryStage.setTitle("Juego");
 		primaryStage.show();
-		JuegoController.initGraphics();
+
 
 	}
 	@Override

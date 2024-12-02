@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -35,6 +36,8 @@ public class JuegoController implements Initializable {
     private ImageView corazon1,corazon2, corazon3;
     @FXML
     private Label usuarioLabel,puntuacionActualLabel,puntuacionTotalLabel;
+    @FXML
+    private VBox vBox;
 
     @Autowired
     private PreguntaController preguntas;
@@ -54,7 +57,7 @@ public class JuegoController implements Initializable {
     private int sumaPuntos=0;
     private static Image coranzonSinVida;
     private static Image coranzonConVida;
-
+    private static Image imagenFondo1, imagenFondo2, imagenFondo3;
     private List<Integer> listaId = new ArrayList<>();
 
     @Override
@@ -71,13 +74,23 @@ public class JuegoController implements Initializable {
             sumaPuntos = sumaPuntos + puntos.getPuntuacion();
         }
         puntuacionTotalLabel.setText(String.valueOf(sumaPuntos));
+
+        vBox.setStyle(        "-fx-background-image: url('" + imagenFondo1.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+
     }
 
 
     public static void initGraphics() {
         coranzonSinVida = new Image(JuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/corazonSinVida.png").toExternalForm());
         coranzonConVida = new Image(JuegoController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/corazonSano.png").toExternalForm());
+        imagenFondo1 = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego1.png").toExternalForm());
+        imagenFondo2 = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego2.png").toExternalForm());
+        imagenFondo3 = new Image(MenuController.class.getClassLoader().getResource("com/app/preguntados/Imagenes/fondoJuego3.png").toExternalForm());
+        System.out.println(imagenFondo1.getUrl());
         System.out.println("Aplicación iniciada. Listo para interactuar con gráficos.");
+
     }
 
     // Devuelve una pregunta aleatoria por su id
@@ -94,6 +107,16 @@ public class JuegoController implements Initializable {
         return preguntas.obtenerPreguntaPorId(id);
     }
 
+    public void respuestaCorrecta(){
+        vBox.setStyle(        "-fx-background-image: url('" + imagenFondo2.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+    }
+    public void respuestaIncorrecta(){
+        vBox.setStyle(        "-fx-background-image: url('" + imagenFondo3.getUrl() + "'); " +
+                "-fx-background-size: cover; " +
+                "-fx-background-repeat: no-repeat;");
+    }
 
     public void nuevaPregunta(){
 
@@ -132,13 +155,15 @@ public class JuegoController implements Initializable {
             contadorComodin++;
             contadorResp++;
             comodin.setText(String.valueOf(3-contadorComodin));
-            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
+            setPuntuacionActualLabel();
+
             nuevaPregunta();
         }
         if (contadorResp==10){
 
            finJuego();
         }
+      respuestaCorrecta();
     }
 
     public void finJuego() throws Exception {
@@ -156,6 +181,17 @@ public class JuegoController implements Initializable {
         puntuacionController.insertPuntuacionToUsuario(usuario.getUsuario().getId(), puntuacion);
 
         PreguntadosApplication.showFinJuegoView();
+    }
+
+    public void setPuntuacionActualLabel(){
+        if (usuario.getModoJuego()==2){
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos*2));
+        } else if (usuario.getModoJuego()==3) {
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos*3));
+        }else{
+            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
+        }
+
     }
 
     @FXML
@@ -182,13 +218,15 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(0).getVerdadera()) {
                 contadorAciertos++;
-            }else{vidasRestantes(); vidas--;}
+                respuestaCorrecta();
+            }else{vidasRestantes(); vidas--; respuestaIncorrecta();}
             contadorResp++;
             if (contadorResp==10){
 
                 finJuego();
             }
-            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
+            setPuntuacionActualLabel();
+
             nuevaPregunta();
         }
     }
@@ -198,13 +236,14 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(1).getVerdadera()) {
                 contadorAciertos++;
-            }else{vidasRestantes(); vidas--;}
+                respuestaCorrecta();
+            }else{vidasRestantes(); vidas--;respuestaIncorrecta();}
             contadorResp++;
             if (contadorResp==10){
 
                 finJuego();
             }
-            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
+            setPuntuacionActualLabel();
             nuevaPregunta();
         }
     }
@@ -214,13 +253,15 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(2).getVerdadera()) {
                 contadorAciertos++;
-            }else{vidasRestantes(); vidas--;}
+                respuestaCorrecta();
+            }else{vidasRestantes(); vidas--;respuestaIncorrecta();}
             contadorResp++;
             if (contadorResp==10){
 
                 finJuego();
             }
-            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
+            setPuntuacionActualLabel();
+
             nuevaPregunta();
         }
     }
@@ -230,13 +271,15 @@ public class JuegoController implements Initializable {
         if (contadorResp<10) {
             if (preguntaDTO.getRespuestas().get(3).getVerdadera()) {
                 contadorAciertos++;
-            }else{vidasRestantes(); vidas--;}
+                respuestaCorrecta();
+            }else{vidasRestantes(); vidas--;respuestaIncorrecta();}
             contadorResp++;
             if (contadorResp==10){
 
                 finJuego();
             }
-            puntuacionActualLabel.setText(String.valueOf(contadorAciertos));
+            setPuntuacionActualLabel();
+
             nuevaPregunta();
         }
     }
